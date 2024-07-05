@@ -1,0 +1,110 @@
+:root {
+	--shadow-sm: 0 0.15rem 0.2rem rgba(var(--color-black-rgb), 0.05);
+	--shadow: 0 0.2em 0.5rem rgba(var(--color-black-rgb), 0.87);
+	--shadow-md: 0 0.4rem 0.5rem rgba(var(--color-black-rgb), 0.1);
+	--shadow-lg: 0 0.4rem 1rem rgba(var(--color-black-rgb), 0.125);
+	--shadow-xl: 0 0.45rem 1.25rem rgba(var(--color-black-rgb), 0.15);
+
+	--border-radius-sm: 0.2rem;
+	--border-radius-md: 0.4rem;
+	--border-radius-lg: 0.8rem;
+	--border-radius-xl: 1.2rem;
+
+	--font-size-base: 1rem;
+	--font-size-xs: calc(var(--font-size-base) - 0.2rem);
+	--font-size-sm: calc(var(--font-size-base) - 0.125rem);
+	--font-size-md: calc(var(--font-size-base) + 1rem);
+	--font-size-lg: calc(var(--font-size-base) + 2rem);
+	--font-size-xl: calc(var(--font-size-base) + 3.125rem);
+
+	--font-weight-bold: 700;
+	--font-weight-semibold: 600;
+	--font-weight-medium: 500;
+	--font-weight-regular: 400;
+	--font-weight-light: 300;
+	--font-weight-thin: 200;
+
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
+	--breakpoint-2xl: 1536px;
+
+	--font-family-base: 'Fira Sans', sans-serif;
+	--font-family-serif: 'Wittgenstein', serif;
+	--font-family-mono: 'Fira Code', monospace;
+	--font-style: normal;
+	--font-variant: normal;
+	--font-weight: normal;
+	--line-height: 1.6;
+
+	/* Colors */
+	--color-gray-100: #f8f9fa;
+	--color-gray-200: #e9ecef;
+	--color-gray-300: #dee2e6;
+	--color-gray-400: #ced4da;
+	--color-gray-500: #adb5bd;
+	--color-gray-600: #6c757d;
+	--color-gray-700: #495057;
+	--color-gray-800: #343a40;
+	--color-gray-900: #212529;
+
+	--color-blue-100: #cceeff;
+	--color-blue-200: #99ddff;
+	--color-blue-300: #66ccff;
+	--color-blue-400: #33bbff;
+	--color-blue-500: #00aaff;
+	--color-blue-600: #0088cc;
+	--color-blue-700: #006699;
+	--color-blue-800: #004466;
+	--color-blue-900: #002233;
+	
+	--color-green-100: #ccffcc;
+	--color-green-200: #99ff99;
+	--color-green-300: #66ff66;
+	--color-green-400: #33ff33;
+	--color-green-500: #00ff00;
+	--color-green-600: #00cc00;
+	--color-green-700: #009900;
+	--color-green-800: #006600;
+	--color-green-900: #003300;
+	
+	--color-red-100: #ffcccc;
+	--color-red-200: #ff9999;
+	--color-red-300: #ff6666;
+	--color-red-400: #ff3333;
+	--color-red-500: #ff0000;
+	--color-red-600: #cc0000;
+	--color-red-700: #990000;
+	--color-red-800: #660000;
+	--color-red-900: #330000;
+	
+	--color-teal-100: #ccffff;
+	--color-teal-200: #99ffff;
+	--color-teal-300: #66ffff;
+	--color-teal-400: #33ffff;
+	--color-teal-500: #00ffff;
+	--color-teal-600: #00cccc;
+	--color-teal-700: #009999;
+	--color-teal-800: #006666;
+	--color-teal-900: #003333;
+
+	--color-yellow-100: #fdfdce;
+	--color-yellow-200: #fcfc9d;
+	--color-yellow-300: #fbfb6c;
+	--color-yellow-400: #faff00;
+	--color-yellow-500: #e6e600;
+	--color-yellow-600: #cccc00;
+	--color-yellow-700: #b3b300;
+	--color-yellow-800: #999900;
+	--color-yellow-900: #808000;
+
+	--color-white: #ffffff;
+	--color-black: #000000;
+	--color-white-rgb: 255, 255, 255;
+	--color-black-rgb: 0, 0, 0;
+	--color-text-primary: var(--color-gray-900);
+	--color-text-light: var(--color-gray-100);
+	--color-bg-dark: var(--color-gray-800);
+	--color-bg-light: var(--color-gray-100);
+}

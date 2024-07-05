@@ -1,0 +1,61 @@
+{{ define "Nav" }}
+<nav id="nav__main" class="container" data-controller="nav" data-nav-target="nav">
+    <div class="nav__wrapper">
+        <a href="/">
+            <img src="/images/gowired.png" alt="Gowired" class="nav__logo">
+        </a>
+        <ul class="nav__list">
+            {{ range .Menu.Items }}
+            <li><a href="{{ .URL }}">{{ .Label }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+</nav>
+
+<style>
+    #nav__main {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        padding: 0;
+        background-color: rgba(var(--color-white-rgb), 0.8);
+        backdrop-filter: blur(1rem);
+        transition: box-shadow 0.3s ease;
+
+        @media (min-width: 656px) {
+            border-radius: var(--border-radius-xl);
+            top: 1rem;
+        }
+
+        &.nav--scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav__wrapper {
+            padding: 0.875rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav__logo {
+            width: 125px;
+            transition: filter 0.3s ease;
+
+            &:hover {
+                filter: drop-shadow(0 0 0.5rem var(--color-yellow-400));
+            }
+        }
+
+        .nav__list {
+            display: inline-flex;
+            gap: 1rem;
+            justify-content: end;
+            align-items: center;
+            list-style: none;
+        }
+    }
+</style>
+{{ end }}

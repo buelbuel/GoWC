@@ -1,0 +1,15 @@
+{{ define "AppLayout" }}
+{{ template "base" . }}
+{{ end }}
+
+{{ define "AppLayoutBody" }}
+<header>
+    {{ template "Nav" . }}
+</header>
+
+<style>
+	main {
+		margin-top: 6rem;
+	}
+</style>
+{{ block "content" . }}{{ end }} {{ end }}

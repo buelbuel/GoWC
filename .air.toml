@@ -1,0 +1,61 @@
+root = "."
+testdata_dir = "testdata"
+tmp_dir = "tmp"
+
+[build]
+  args_bin = []
+  bin = "./tmp/main"
+  cmd = "go build -o ./tmp/main cmd/main.go"
+  delay = 1000
+  # Uncomment this line to exclude the public/css directory from the
+  #   build if you compile scss, otherwise there will be recursion.
+  # exclude_dir = ["assets", "tmp", "vendor", "testdata", "public/css"]
+  exclude_dir = ["assets", "tmp", "vendor", "testdata"]
+  exclude_file = []
+  exclude_regex = ["_test.go"]
+  exclude_unchanged = false
+  follow_symlink = false
+  full_bin = ""
+  include_dir = []
+  # You need to include scss files here if you want to compile them.
+  # include_ext = ["go", "tpl", "tmpl", "html", "scss"]
+  include_ext = ["go", "tpl", "tmpl", "html", "css"]
+  include_file = []
+  kill_delay = "0s"
+  log = "build-errors.log"
+  poll = false
+  poll_interval = 0
+  post_cmd = []
+  # Uncomment this line to compile SCSS files in a build step.
+  #   You will need to install a sass library according to your OS.
+  #   On macOS with Homebrew, you can run `brew install sass/sass/sass`.
+  #   On Windows, you can download the installer from https://sass-lang.com/install.
+  #   On Linux, you can run `sudo apt-get install sass`.
+  # pre_cmd = ["sass src/scss/main.scss public/css/main.css"]
+  rerun = false
+  rerun_delay = 500
+  send_interrupt = false
+  stop_on_error = false
+
+[color]
+  app = ""
+  build = "yellow"
+  main = "magenta"
+  runner = "green"
+  watcher = "cyan"
+
+[log]
+  main_only = false
+  time = false
+
+[misc]
+  clean_on_exit = false
+
+[proxy]
+  app_port = 0
+  enabled = false
+  proxy_port = 0
+
+[screen]
+  clear_on_rebuild = false
+  keep_scroll = true

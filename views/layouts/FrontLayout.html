@@ -1,0 +1,16 @@
+{{ define "FrontLayout" }}
+{{ template "base" . }}
+{{ end }}
+
+{{ define "FrontLayoutBody" }}
+<header>
+	{{ template "Nav" . }}
+</header>
+<main>{{ renderDynamicTemplate .ContentBlock . }}</main>
+
+<style>
+	main {
+		margin-top: 6rem;
+	}
+</style>
+{{ end }}

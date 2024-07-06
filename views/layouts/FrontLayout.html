@@ -3,14 +3,17 @@
 {{ end }}
 
 {{ define "FrontLayoutBody" }}
+
 <header>
-	{{ template "Nav" . }}
+    <gowc-nav-main menu-items='[{"url":"/auth","label":"Login"}]'></gowc-nav-main>
 </header>
+
 <main>{{ renderDynamicTemplate .ContentBlock . }}</main>
 
 <style>
-	main {
-		margin-top: 6rem;
-	}
+    main {
+        margin-top: 6rem;
+    }
 </style>
+
 {{ end }}

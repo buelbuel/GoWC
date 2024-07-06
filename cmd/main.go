@@ -1,8 +1,8 @@
 package main
 
 import (
-	routes "github.com/buelbuel/gowired/internal/routes"
-	utils "github.com/buelbuel/gowired/internal/utils"
+	routes "github.com/buelbuel/gowc/internal/routes"
+	utils "github.com/buelbuel/gowc/internal/utils"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )

@@ -1,7 +1,7 @@
 package routes
 
 import (
-	handlers "github.com/buelbuel/gowired/internal/handlers"
+	handlers "github.com/buelbuel/gowc/internal/handlers"
 	"github.com/labstack/echo/v4"
 )
 

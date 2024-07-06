@@ -1,15 +1,11 @@
-import { Application } from 'https://unpkg.com/@hotwired/stimulus/dist/stimulus.js'
-import ButtonController from './controllers/button_controller.js'
-import NavController from './controllers/nav_controller.js'
+/** Components */
+import './components/AuthFormComponent.js';
+import './components/NavMainComponent.js';
+import './components/ButtonComponent.js';
+import './components/CardComponent.js';
+import './components/InputComponent.js';
+import './components/CardHeaderComponent.js';
+import './components/FieldsetComponent.js';
 
-const application = Application.start()
-
-const controllers = {
-  button: ButtonController,
-  nav: NavController,
-  // Add more controllers here as needed
-}
-
-Object.entries(controllers).forEach(([name, controller]) => {
-  application.register(name, controller)
-})
+/** Controllers */
+import './controllers/ButtonController.js';

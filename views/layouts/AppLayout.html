@@ -3,13 +3,18 @@
 {{ end }}
 
 {{ define "AppLayoutBody" }}
+
 <header>
-    {{ template "Nav" . }}
+	<gowc-nav-main
+		menu-items='[{"url":"/dashboard","label":"Dashboard"},{"url":"/profile","label":"Profile"},{"url":"/logout","label":"Logout"}]'></gowc-nav-main>
 </header>
+
+<main>{{ renderDynamicTemplate .ContentBlock . }}</main>
 
 <style>
 	main {
 		margin-top: 6rem;
 	}
 </style>
-{{ block "content" . }}{{ end }} {{ end }}
+
+{{ end }}

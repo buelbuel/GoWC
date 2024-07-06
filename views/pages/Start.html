@@ -9,20 +9,19 @@
 	</div>
 	<div class="start-page__button-example">
 		<div class="container">
-			<h2>Stimulus Example</h2>
+			<h2>JS Controller Example</h2>
 			<p>Open the console and see what the Button do:</p>
-
-			{{ template "button" dict "buttonType" "button" "variant" "black" "text" "👍" "controller" "button" }}
-			<p>For an example integration, see: views/components/Button.html</p>
-
+			<gowc-button button-type="button" variant="black" text="👇" controller="exampleController"></gowc-button>
+			<p>For an example integration, see:</p>
 			<code class="start-page__code">
-				<span class="start-page__code---keyword">buttonType</span> <span class="start-page__code---comment"># button, input, reset</span><br />
-				<span class="start-page__code---keyword">variant</span> <span class="start-page__code---comment"># blue, green, red, yellow, gray, white, black</span><br />
-				<span class="start-page__code---keyword">text</span> <span class="start-page__code---comment"># string</span><br />
-				<span class="start-page__code---keyword">controller</span> <span class="start-page__code---comment"># the name of the stimulus controller</span>
+				<span class="start-page__code---keyword">public</span>/<span class="start-page__code---keyword">controllers</span>/<span class="start-page__code---keyword">ExampleController.js</span>
 			</code>
-
+			<p>and</p>
+			<code class="start-page__code">
+				<span class="start-page__code---keyword">public</span>/<span class="start-page__code---keyword">js</span>/<span class="start-page__code---keyword">components</span>/<span class="start-page__code---keyword">GowcButton.js</span>
+			</code>
 		</div>
+	</div>
 	</div>
 	<div class="start-page__directory-structure">
 		<div class="container">
@@ -30,26 +29,26 @@
 			<p>This is the default structure of a new project 🏛️:</p>
 
 			<code class="start-page__code">
-				<span class="start-page__code---keyword">gowired</span>/<br />
-				├── <span class="start-page__code---keyword">cmd</span>/<br />
-				│ └── <span class="start-page__code---keyword">main.go</span> <span class="start-page__code---comment"># Application entry point</span><br />
-				├── <span class="start-page__code---keyword">internal</span>/<br />
-				│ ├── <span class="start-page__code---keyword">api</span>/<br />
-				│ │ ├── <span class="start-page__code---keyword">handlers</span>/ <span class="start-page__code---comment"># HTTP request handlers</span><br />
-				│ │ └── <span class="start-page__code---keyword">routes</span>/ <span class="start-page__code---comment"># Route definitions</span><br />
-				│ ├── <span class="start-page__code---keyword">config</span>/ <span class="start-page__code---comment"># Application configuration</span><br />
-				│ ├── <span class="start-page__code---keyword">middleware</span>/ <span class="start-page__code---comment"># Custom middleware</span><br />
-				│ └── <span class="start-page__code---keyword">utils</span>/ <span class="start-page__code---comment"># Utility functions</span><br />
-				├── <span class="start-page__code---keyword">public</span>/<br />
-				│ ├── <span class="start-page__code---keyword">css</span>/ <span class="start-page__code---comment"># CSS files</span><br />
-				│ └── <span class="start-page__code---keyword">js</span>/ <span class="start-page__code---comment"># JavaScript files</span><br />
-				├── <span class="start-page__code---keyword">views</span>/<br />
-				│ ├── <span class="start-page__code---keyword">components</span>/ <span class="start-page__code---comment"># Reusable components</span><br />
-				│ ├── <span class="start-page__code---keyword">layouts</span>/ <span class="start-page__code---comment"># Layout templates</span><br />
-				│ ├── <span class="start-page__code---keyword">pages</span>/ <span class="start-page__code---comment"># Page-specific templates</span><br />
-				│ └── <span class="start-page__code---keyword">partials</span>/ <span class="start-page__code---comment"># Reusable template components</span><br />
-				└── <span class="start-page__code---keyword">go.mod</span> <span class="start-page__code---comment"># Go module file</span><br />
-			</code>
+        <span class="start-page__code---keyword">gowc</span>/<br />
+        ├── <span class="start-page__code---keyword">cmd</span>/<br />
+        │ └── <span class="start-page__code---keyword">main.go</span> <span class="start-page__code---comment"># Application entry point</span><br />
+        ├── <span class="start-page__code---keyword">internal</span>/<br />
+        │ ├── <span class="start-page__code---keyword">api</span>/<br />
+        │ │ ├── <span class="start-page__code---keyword">handlers</span>/ <span class="start-page__code---comment"># HTTP request handlers</span><br />
+        │ │ └── <span class="start-page__code---keyword">routes</span>/ <span class="start-page__code---comment"># Route definitions</span><br />
+        │ ├── <span class="start-page__code---keyword">config</span>/ <span class="start-page__code---comment"># Application configuration</span><br />
+        │ ├── <span class="start-page__code---keyword">middleware</span>/ <span class="start-page__code---comment"># Custom middleware</span><br />
+        │ └── <span class="start-page__code---keyword">utils</span>/ <span class="start-page__code---comment"># Utility functions</span><br />
+        ├── <span class="start-page__code---keyword">public</span>/<br />
+        │ ├── <span class="start-page__code---keyword">css</span>/ <span class="start-page__code---comment"># CSS files</span><br />
+        │ └── <span class="start-page__code---keyword">js</span>/ <span class="start-page__code---comment"># JavaScript files</span><br />
+        ├── <span class="start-page__code---keyword">views</span>/<br />
+        │ ├── <span class="start-page__code---keyword">components</span>/ <span class="start-page__code---comment"># Reusable components</span><br />
+        │ ├── <span class="start-page__code---keyword">layouts</span>/ <span class="start-page__code---comment"># Layout templates</span><br />
+        │ ├── <span class="start-page__code---keyword">pages</span>/ <span class="start-page__code---comment"># Page-specific templates</span><br />
+        │ └── <span class="start-page__code---keyword">partials</span>/ <span class="start-page__code---comment"># Reusable template components</span><br />
+        └── <span class="start-page__code---keyword">go.mod</span> <span class="start-page__code---comment"># Go module file</span><br />
+      </code>
 		</div>
 	</div>
 	<div class="start-page__getting-started">
@@ -57,34 +56,31 @@
 			<h2>Getting Started</h2>
 			<p>1. Clone the repository:</p>
 			<code class="start-page__code">
-				<span class="start-page__code---keyword">git clone</span> https://github.com/buelbuel/gowired.git<br />
-				<span class="start-page__code---keyword">cd</span> gowired
-			</code>
+        <span class="start-page__code---keyword">git clone</span> https://github.com/buelbuel/gowc.git<br />
+        <span class="start-page__code---keyword">cd</span> gowc
+      </code>
 			<p>2. Install dependencies:</p>
 			<code class="start-page__code">
-				<span class="start-page__code---keyword">go mod download</span><br />
-				<span class="start-page__code---keyword">go install</span> github.com/air-verse/air@latest
-			</code>
+        <span class="start-page__code---keyword">go mod download</span><br />
+        <span class="start-page__code---keyword">go install</span> github.com/air-verse/air@latest
+      </code>
 			<p>3. Run the application:</p>
 			<code class="start-page__code">
-				<span class="start-page__code---keyword">air</span>
-			</code>
+        <span class="start-page__code---keyword">air</span>
+      </code>
 			<p>4. Access the application at <a href="http://localhost:4000">http://localhost:4000</a></p>
 		</div>
 	</div>
 	<div class="start-page__github">
-
-		<h3>Clone the template and get started:</h3>
+		<h3>Fork the template and get started:</h3>
 		<p>
-			<a href="https://github.com/buelbuel/gowired"><svg xmlns="http://www.w3.org/2000/svg" width="288"
-					height="288" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-					stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">
+			<a href="https://github.com/buelbuel/gowc"><svg xmlns="http://www.w3.org/2000/svg" width="288" height="288"
+					viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+					stroke-linejoin="round" class="feather feather-github">
 					<path
 						d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
 					</path>
 				</svg></a>
-		</p>
-
 	</div>
 </section>
 
@@ -97,32 +93,52 @@
 	}
 
 	.start-page__button-example {
-		background-color: var(--color-teal-300);
+		background-color: var(--color-teal-800);
+
+		@media (prefers-color-scheme: light) {
+			background-color: var(--color-teal-300);
+		}
 	}
 
 	.start-page__getting-started {
-		background-color: var(--color-yellow-400);
+		background-color: var(--color-yellow-800);
+
+		@media (prefers-color-scheme: light) {
+			background-color: var(--color-yellow-400);
+		}
 	}
 
 	.start-page__code {
-		background-color: var(--color-gray-800);
+		background-color: var(--color-gray-900);
 		padding: 1rem;
 		border-radius: 0.5rem;
-		color: var(--color-gray-400);
+		color: var(--color-gray-500);
 		display: block;
 		font-size: var(--font-size-sm);
 		line-height: 1.5;
 		font-family: var(--font-family-mono);
+
+		@media (prefers-color-scheme: light) {
+			color: var(--color-gray-200);
+		}
 	}
 
 	.start-page__code---keyword {
-		color: var(--color-teal-500);
+		color: var(--color-teal-800);
 		font-weight: var(--font-weight-bold);
+
+		@media (prefers-color-scheme: light) {
+			color: var(--color-teal-500);
+		}
 	}
 
 	.start-page__code---comment {
-		color: var(--color-green-500);
+		color: var(--color-green-700);
 		font-weight: var(--font-weight-thin);
+
+		@media (prefers-color-scheme: light) {
+			color: var(--color-green-300);
+		}
 	}
 
 	.start-page__github {
@@ -130,14 +146,21 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		background-color: var(--color-gray-800);
-		color: var(--color-yellow-400);
+		color: var(--color-yellow-800);
+
+		@media (prefers-color-scheme: light) {
+			color: var(--color-yellow-400);
+		}
 
 		a {
-			color: var(--color-yellow-400);
+			color: var(--color-yellow-800);
 
 			&:hover {
 				color: var(--color-white);
+			}
+
+			@media (prefers-color-scheme: light) {
+				color: var(--color-yellow-400);
 			}
 		}
 	}

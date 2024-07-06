@@ -75,9 +75,21 @@ func (template *Templates) Render(writer io.Writer, name string, data interface{
 		dataMap = make(map[string]interface{})
 	}
 	dataMap["Layout"] = name
-	error := template.templates.ExecuteTemplate(writer, "base", dataMap)
-	if error != nil {
-		context.Logger().Errorf("Error rendering template %s: %v", name, error)
+
+	if context.Request().Header.Get("Accept") == "text/vnd.turbo-stream.html" {
+		var buf bytes.Buffer
+		err := template.templates.ExecuteTemplate(&buf, name, dataMap)
+		if err != nil {
+			context.Logger().Errorf("Error rendering turbo stream template %s: %v", name, err)
+			return err
+		}
+		writer.Write([]byte(buf.String()))
+		return nil
 	}
-	return error
+
+	err := template.templates.ExecuteTemplate(writer, "base", dataMap)
+	if err != nil {
+		context.Logger().Errorf("Error rendering template %s: %v", name, err)
+	}
+	return err
 }

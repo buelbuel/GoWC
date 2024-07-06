@@ -4,8 +4,8 @@ This repository contains the scaffolding for a basic MVC style web application u
 
 ## Features
 
-- **Turbo**: Integrates Hotwire's Turbo to speed up page transitions without requiring full page reloads. This approach enhances the responsiveness and speed of the application.
-- **Stimulus**: Uses Stimulus for modest JavaScript enhancements, allowing for extended functionality with minimal overhead.
+- **Web Components**: Utilizes native Web Components for encapsulated and reusable UI elements.
+- **Vanilla JavaScript Controllers**: Implements vanilla JavaScript controllers for handling user interactions and extending functionality.
 - **Air**: A lightweight development server that automatically reloads the application when files are modified.
 - **Echo**: A lightweight web framework for Go that provides a fast and efficient way to build web applications.
 - **Templates**: Utilizes Go's native templating system to generate HTML content.
@@ -14,8 +14,8 @@ This repository contains the scaffolding for a basic MVC style web application u
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/buelbuel/gowired.git
-    cd gowired
+    git clone https://github.com/buelbuel/gowc.git
+    cd gowc
     ```
 2. Install dependencies:
     ```bash
@@ -33,9 +33,10 @@ If you run this application in a container, you can use the devcontainer extensi
 ## View Rendering
 
 The application uses Go's native templating system, which is both powerful and flexible. This allows for dynamic HTML content generation based on server-side logic and data.
-Since modern CSS allows for most needed functionality like nesting, variables and more, a preprocessor is not needed in most cases. However, If you want to ensure backwards compatibality and need more extensive features, you can include any preprocessor in the air build step. See the comments in air.toml.
+Since modern CSS allows for most needed functionality like nesting, variables and more, a preprocessor is not needed in most cases. However, If you want to ensure backwards compatibility and need more extensive features, you can include any preprocessor in the air build step. See the comments in air.toml.
+
 ```bash
-gowired/
+gowc/
 ├── cmd/
 │ └── main.go # Application entry point
 ├── internal/
@@ -48,6 +49,8 @@ gowired/
 ├── public/
 │ ├── css/ # CSS files
 │ └── js/ # JavaScript files
+│ ├── components/ # Web Components
+│ └── controllers/ # JavaScript Controllers
 ├── views/
 │ ├── components/ # Reusable components
 │ ├── layouts/ # Layout templates

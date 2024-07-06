@@ -12,8 +12,8 @@ type Menu struct {
 var (
 	FrontMenu = Menu{
 		Items: []MenuItem{
-			{Label: "Register", URL: "/register"},
-			{Label: "Login", URL: "/login"},
+			{Label: "Login", URL: "/auth"},
+			{Label: "Github", URL: "https://github.com/buelbuel/gowc"},
 		},
 	}
 

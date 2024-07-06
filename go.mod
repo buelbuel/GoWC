@@ -1,4 +1,4 @@
-module github.com/buelbuel/gowired
+module github.com/buelbuel/gowc
 
 go 1.22.3
 

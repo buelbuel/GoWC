@@ -16,3 +16,6 @@ go.work.sum
 tmp/
 vendor/
 .prettier*
+*.pem
+
+config.toml

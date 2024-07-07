@@ -1,0 +1,40 @@
+[Server]
+# Define the server address to listen on, default is localhost:4000
+Address = "localhost:4000"
+# Whether to use logger on server start, default is true
+UseLogger = true
+# Whether to serve on HTTPS, default is false
+UseTls = false
+# Define the certificate file path, default is cert.pem
+CertFile = "cert.pem"
+# Define the key file path, default is key.pem
+KeyFile = "key.pem"
+# Whether to use Let's Encrypt, default is false
+UseAutoTls = false
+# Define the domain name, default is example.com
+Domain = "example.com"
+# Define the cache directory, default is /var/www/.cache
+CacheDir = "/var/www/.cache"
+# Whether to enable CORS, default is false
+EnableCors = false
+# Define the allowed origins, default is ["https://example.com"]
+CorsAllowOrigins = ["https://example.com"]
+# Define the allowed methods, default is ["GET", "PUT", "POST", "DELETE"]
+CorsAllowMethods = ["GET", "PUT", "POST", "DELETE"]
+
+[Auth]
+# Define the JWT secret key, default is "your_secret_key_here"
+JwtSecretKey = "your_secret_key_here"
+
+[Database]
+# Define the database URL, default is postgres://user:password@localhost/db?sslmode=disable
+Url = "postgres://user:password@localhost/db?sslmode=disable"
+MaxConns = 10
+MaxIdleConns = 10
+ConnMaxLifetime = "10h"
+
+[StaticPaths]
+# Define static paths to serve, e.g. css = "public/css"
+css = "public/css"
+js = "public/js"
+images = "public/images"

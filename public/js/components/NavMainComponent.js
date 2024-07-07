@@ -20,10 +20,8 @@ class NavMainComponent extends HTMLElement {
             padding: 0;
             backdrop-filter: blur(1rem);
             transition: box-shadow 0.3s ease, background-color 0.3s ease;
-          }
-          
-          @media (min-width: 656px) {
-            #nav__main {
+
+            @media (min-width: 656px) {
               border-radius: var(--border-radius-xl);
               top: 1rem;
             }
@@ -41,12 +39,20 @@ class NavMainComponent extends HTMLElement {
             font-size: 2rem;
             color: var(--color-white);
             transition: text-shadow 0.3s ease;
+            
+            @media (prefers-color-scheme: light) {
+              color: var(--color-blue-700);
+            }
+
+            &:hover {
+              text-shadow: 0.17rem 0.17rem 0 var(--color-black);
+
+              @media (prefers-color-scheme: light) {
+                text-shadow: 0.17rem 0.17rem 0 var(--color-yellow-200);
+              }
+            }
           }
-          
-          .nav__logo:hover {
-            text-shadow: 0.25rem 0.25rem 0 var(--color-black);
-          }
-          
+                    
           .nav__list {
             display: inline-flex;
             gap: 1rem;
@@ -60,7 +66,7 @@ class NavMainComponent extends HTMLElement {
             background-color: rgba(var(--color-black-rgb), 0.7);
 
             @media (prefers-color-scheme: light) {
-              background-color: rgba(var(--color-gray-800-rgb), 0.8);
+              background-color: rgba(var(--color-white-rgb), 0.8);
             }
           }
         </style>

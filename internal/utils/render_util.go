@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
 )
@@ -92,4 +93,13 @@ func (template *Templates) Render(writer io.Writer, name string, data interface{
 		context.Logger().Errorf("Error rendering template %s: %v", name, err)
 	}
 	return err
+}
+
+func RenderPage(context echo.Context, title, contentBlock, layout string) error {
+	data := map[string]interface{}{
+		"Title":        title,
+		"ContentBlock": contentBlock,
+		"echoContext":  context,
+	}
+	return context.Render(http.StatusOK, layout, data)
 }

@@ -1,19 +1,28 @@
 package main
 
 import (
+	"log"
+
+	config "github.com/buelbuel/gowc/internal/config"
 	routes "github.com/buelbuel/gowc/internal/routes"
-	utils "github.com/buelbuel/gowc/internal/utils"
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	_ "github.com/lib/pq"
 )
 
 func main() {
 	echo := echo.New()
-	echo.Static("/css", "public/css")
-	echo.Static("/js", "public/js")
-	echo.Static("/images", "public/images")
-	echo.Use(middleware.Logger())
-	echo.Renderer = utils.NewTemplates()
-	routes.WebRoutes(echo)
-	echo.Logger.Fatal(echo.Start("localhost:4000"))
+	appConfig := config.NewAppConfig()
+	appConfig.SetupMiddleware(echo)
+	appConfig.SetupStaticFiles(echo)
+	appConfig.SetupRenderer(echo)
+	appState := config.InitializeState()
+	dbConfig, err := config.NewDBConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer dbConfig.DB.Close()
+	jwtConfig := config.NewJwtConfig()
+	routes.WebRoutes(echo, appState, jwtConfig, dbConfig.DB)
+	routes.ApiRoutes(echo, appState, dbConfig.DB)
+	appConfig.StartServer(echo)
 }

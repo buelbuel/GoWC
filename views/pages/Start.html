@@ -11,7 +11,14 @@
 		<div class="container">
 			<h2>JS Controller Example</h2>
 			<p>Open the console and see what the Button do:</p>
-			<gowc-button button-type="button" variant="black" text="👇" controller="exampleController"></gowc-button>
+			
+			<gowc-button
+				button-type="button"
+				variant="black"
+				text="👇"
+				controller="exampleController">
+			</gowc-button>
+			
 			<p>For an example integration, see:</p>
 			<code class="start-page__code">
 				<span class="start-page__code---keyword">public</span>/<span class="start-page__code---keyword">controllers</span>/<span class="start-page__code---keyword">ExampleController.js</span>
@@ -29,26 +36,26 @@
 			<p>This is the default structure of a new project 🏛️:</p>
 
 			<code class="start-page__code">
-        <span class="start-page__code---keyword">gowc</span>/<br />
-        ├── <span class="start-page__code---keyword">cmd</span>/<br />
-        │ └── <span class="start-page__code---keyword">main.go</span> <span class="start-page__code---comment"># Application entry point</span><br />
-        ├── <span class="start-page__code---keyword">internal</span>/<br />
-        │ ├── <span class="start-page__code---keyword">api</span>/<br />
-        │ │ ├── <span class="start-page__code---keyword">handlers</span>/ <span class="start-page__code---comment"># HTTP request handlers</span><br />
-        │ │ └── <span class="start-page__code---keyword">routes</span>/ <span class="start-page__code---comment"># Route definitions</span><br />
-        │ ├── <span class="start-page__code---keyword">config</span>/ <span class="start-page__code---comment"># Application configuration</span><br />
-        │ ├── <span class="start-page__code---keyword">middleware</span>/ <span class="start-page__code---comment"># Custom middleware</span><br />
-        │ └── <span class="start-page__code---keyword">utils</span>/ <span class="start-page__code---comment"># Utility functions</span><br />
-        ├── <span class="start-page__code---keyword">public</span>/<br />
-        │ ├── <span class="start-page__code---keyword">css</span>/ <span class="start-page__code---comment"># CSS files</span><br />
-        │ └── <span class="start-page__code---keyword">js</span>/ <span class="start-page__code---comment"># JavaScript files</span><br />
-        ├── <span class="start-page__code---keyword">views</span>/<br />
-        │ ├── <span class="start-page__code---keyword">components</span>/ <span class="start-page__code---comment"># Reusable components</span><br />
-        │ ├── <span class="start-page__code---keyword">layouts</span>/ <span class="start-page__code---comment"># Layout templates</span><br />
-        │ ├── <span class="start-page__code---keyword">pages</span>/ <span class="start-page__code---comment"># Page-specific templates</span><br />
-        │ └── <span class="start-page__code---keyword">partials</span>/ <span class="start-page__code---comment"># Reusable template components</span><br />
-        └── <span class="start-page__code---keyword">go.mod</span> <span class="start-page__code---comment"># Go module file</span><br />
-      </code>
+				<span class="start-page__code---keyword">gowc</span>/<br />
+				├── <span class="start-page__code---keyword">cmd</span>/<br />
+				│ └── <span class="start-page__code---keyword">main.go</span> <span class="start-page__code---comment"># Application entry point</span><br />
+				├── <span class="start-page__code---keyword">internal</span>/<br />
+				│ ├── <span class="start-page__code---keyword">api</span>/<br />
+				│ │ ├── <span class="start-page__code---keyword">handlers</span>/ <span class="start-page__code---comment"># HTTP request handlers</span><br />
+				│ │ └── <span class="start-page__code---keyword">routes</span>/ <span class="start-page__code---comment"># Route definitions</span><br />
+				│ ├── <span class="start-page__code---keyword">config</span>/ <span class="start-page__code---comment"># Application configuration</span><br />
+				│ ├── <span class="start-page__code---keyword">middleware</span>/ <span class="start-page__code---comment"># Custom middleware</span><br />
+				│ └── <span class="start-page__code---keyword">utils</span>/ <span class="start-page__code---comment"># Utility functions</span><br />
+				├── <span class="start-page__code---keyword">public</span>/<br />
+				│ ├── <span class="start-page__code---keyword">css</span>/ <span class="start-page__code---comment"># CSS files</span><br />
+				│ └── <span class="start-page__code---keyword">js</span>/ <span class="start-page__code---comment"># JavaScript files</span><br />
+				├── <span class="start-page__code---keyword">views</span>/<br />
+				│ ├── <span class="start-page__code---keyword">components</span>/ <span class="start-page__code---comment"># Reusable components</span><br />
+				│ ├── <span class="start-page__code---keyword">layouts</span>/ <span class="start-page__code---comment"># Layout templates</span><br />
+				│ ├── <span class="start-page__code---keyword">pages</span>/ <span class="start-page__code---comment"># Page-specific templates</span><br />
+				│ └── <span class="start-page__code---keyword">partials</span>/ <span class="start-page__code---comment"># Reusable template components</span><br />
+				└── <span class="start-page__code---keyword">go.mod</span> <span class="start-page__code---comment"># Go module file</span><br />
+			</code>
 		</div>
 	</div>
 	<div class="start-page__getting-started">

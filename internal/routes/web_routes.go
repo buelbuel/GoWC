@@ -10,7 +10,12 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func WebRoutes(echo *echo.Echo, state *utils.State, jwtConfig *config.JwtConfig, db *sql.DB) {
+func WebRoutes(
+	echo *echo.Echo,
+	state *utils.State,
+	jwtConfig *config.JwtConfig,
+	db *sql.DB,
+) {
 	authHandlers := handlers.NewAuthHandlers(state, db)
 
 	// Public routes

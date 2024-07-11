@@ -1,40 +1,62 @@
-[Server]
-# Define the server address to listen on, default is localhost:4000
-Address = "localhost:4000"
-# Whether to use logger on server start, default is true
+# Server address to listen on
+ServerAddress = "localhost:4000"
+# Enable logging of server requests
 UseLogger = true
-# Whether to serve on HTTPS, default is false
-UseTls = false
-# Define the certificate file path, default is cert.pem
+# Logger output: "stdout" or "file"
+LogOutput = "stdout"
+# Log file path (used if LogOutput is "file")
+LogFile = ""
+# Colorize log output (only applies to stdout)
+ColorizeLogger = true
+# Enable HTTPS
+UseTLS = false
+# Path to SSL certificate file
 CertFile = "cert.pem"
-# Define the key file path, default is key.pem
+# Path to SSL key file
 KeyFile = "key.pem"
-# Whether to use Let's Encrypt, default is false
-UseAutoTls = false
-# Define the domain name, default is example.com
+# Use Let's Encrypt for SSL
+UseAutoTLS = false
+# Domain name for Let's Encrypt
 Domain = "example.com"
-# Define the cache directory, default is /var/www/.cache
+# Cache directory for Let's Encrypt certificates
 CacheDir = "/var/www/.cache"
-# Whether to enable CORS, default is false
-EnableCors = false
-# Define the allowed origins, default is ["https://example.com"]
-CorsAllowOrigins = ["https://example.com"]
-# Define the allowed methods, default is ["GET", "PUT", "POST", "DELETE"]
-CorsAllowMethods = ["GET", "PUT", "POST", "DELETE"]
+# Enable Cross-Origin Resource Sharing (CORS)
+EnableCORS = false
+# Allowed origins for CORS
+CORSAllowOrigins = ["https://example.com"]
+# Allowed methods for CORS
+CORSAllowMethods = ["GET", "PUT", "POST", "DELETE"]
 
 [Auth]
-# Define the JWT secret key, default is "your_secret_key_here"
+# Secret key for JWT token generation
 JwtSecretKey = "your_secret_key_here"
+# JWT token expiration time
+JwtExpirationTime = "72h"
 
 [Database]
-# Define the database URL, default is postgres://user:password@localhost/db?sslmode=disable
+# Database connection URL
 Url = "postgres://user:password@localhost/db?sslmode=disable"
+# Maximum number of open connections to the database
 MaxConns = 10
+# Maximum number of idle connections in the pool
 MaxIdleConns = 10
+# Maximum amount of time a connection may be reused
 ConnMaxLifetime = "10h"
 
 [StaticPaths]
-# Define static paths to serve, e.g. css = "public/css"
+# Paths for serving static files
 css = "public/css"
 js = "public/js"
 images = "public/images"
+
+[State]
+# Initial application state
+InitialState = { user = "", isAuthenticated = false }
+
+[TLS]
+# Path to SSL certificate file
+CertFile = "cert.pem"
+# Path to SSL key file
+KeyFile = "key.pem"
+# Enable HTTPS
+UseTLS = false

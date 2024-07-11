@@ -5,7 +5,7 @@ class ButtonComponent extends HTMLElement {
     const text = this.getAttribute("text") || "";
     const controller = this.getAttribute("controller") || "";
 
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
       <button type="${buttonType}" class="button button--${variant}" data-controller="${controller}">${text}</button>
       <style>

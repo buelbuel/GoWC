@@ -1,6 +1,6 @@
 class CardComponent extends HTMLElement {
   connectedCallback() {
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
         <div class="card">
           <slot></slot>
@@ -22,4 +22,4 @@ class CardComponent extends HTMLElement {
   }
 }
 
-customElements.define('gowc-card', CardComponent);
+customElements.define("gowc-card", CardComponent);

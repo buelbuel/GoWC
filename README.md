@@ -2,18 +2,18 @@
 
 This repository contains a boilerplate for a basic MVC style web application using the Echo Framework. The application utilizes native Go templates for rendering views, ensuring efficient server-side HTML generation. It also includes an example model, controller, and view for a user registration and authentication system with JSON Web Tokens for authentication.
 
-![Screenshot1](https://github.com/buelbuel/gowc/blob/main/public/images/screenshot.png?raw=true)
+![Screenshot](https://github.com/buelbuel/gowc/blob/main/public/images/screenshot.png?raw=true)
 
 ## Features
 
-- **Web Components**: Utilizes native Web Components for encapsulated and reusable UI elements.
-- **Vanilla JavaScript Controllers**: Implements JavaScript controllers for handling user interactions and extending functionality.
-- **Air**: A lightweight development server that automatically reloads the application when files are modified.
-- **Echo**: A lightweight web framework for Go that provides a fast and efficient way to build web applications.
-- **Templates**: Utilizes Go's native templating system to generate HTML content.
-- **JSON Web Tokens**: Utilizes JSON Web Tokens for authentication and authorization.
-- **PostgreSQL**: Easily replace with any other database of your choice.
-- **Let's Encrypt**: Automatically manages SSL certificates for HTTPS connections.
+⚡️ **Web Components**: Utilizes native Web Components for encapsulated and reusable UI elements.  
+💧 **Vanilla JavaScript Controllers**: Implements JavaScript controllers for handling user interactions and extendinfunctionality.  
+☁️ **Air**: A lightweight development server that automatically reloads the application when files are modified.  
+🌐 **Echo**: A lightweight web framework for Go that provides a fast and efficient way to build web applications.  
+📄 **Templates**: Utilizes Go's native templating system to generate HTML content.  
+🔐 **JSON Web Tokens**: Utilizes JSON Web Tokens for authentication and authorization.  
+🗄️ **PostgreSQL**: Easily replace with any other database of your choice.  
+🔒 **Let's Encrypt**: Automatically manages SSL certificates for HTTPS connections.  
 
 ## Getting Started
 

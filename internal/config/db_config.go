@@ -5,58 +5,45 @@ import (
 	"os"
 	"time"
 
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" // Blank import for PostgreSQL driver
 	"github.com/pelletier/go-toml"
 )
 
+// DBConfig represents the configuration for the database.
 type DBConfig struct {
-	DatabaseURL     string
-	DB              *sql.DB
-	MaxConns        int
-	MaxIdleConns    int
-	ConnMaxLifetime time.Duration
+	DatabaseURL     string        `toml:"Url"`
+	MaxConns        int           `toml:"MaxConns"`
+	MaxIdleConns    int           `toml:"MaxIdleConns"`
+	ConnMaxLifetime time.Duration `toml:"ConnMaxLifetime"`
+	DB              *sql.DB       `toml:"-"`
 }
 
+// NewDBConfig creates a new DBConfig instance by reading the configuration from a toml file.
 func NewDBConfig() (*DBConfig, error) {
+	config := &DBConfig{}
 	configFile, err := os.ReadFile("config.toml")
 	if err != nil {
 		return nil, err
 	}
 
-	var config struct {
-		Database struct {
-			Url             string
-			MaxConns        int
-			MaxIdleConns    int
-			ConnMaxLifetime string
-		}
-	}
-
-	if err := toml.Unmarshal(configFile, &config); err != nil {
+	if err := toml.Unmarshal(configFile, config); err != nil {
 		return nil, err
 	}
 
-	db, err := sql.Open("postgres", config.Database.Url)
+	return config, nil
+}
+
+// Initialize initializes the database connection and sets connection pool settings.
+func (config *DBConfig) Initialize() error {
+	db, err := sql.Open("postgres", config.DatabaseURL)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	connMaxLifetime, err := time.ParseDuration(config.Database.ConnMaxLifetime)
-	if err != nil {
-		return nil, err
-	}
+	config.DB = db
+	config.DB.SetMaxOpenConns(config.MaxConns)
+	config.DB.SetMaxIdleConns(config.MaxIdleConns)
+	config.DB.SetConnMaxLifetime(config.ConnMaxLifetime)
 
-	dbConfig := &DBConfig{
-		DatabaseURL:     config.Database.Url,
-		DB:              db,
-		MaxConns:        config.Database.MaxConns,
-		MaxIdleConns:    config.Database.MaxIdleConns,
-		ConnMaxLifetime: connMaxLifetime,
-	}
-
-	db.SetMaxOpenConns(dbConfig.MaxConns)
-	db.SetMaxIdleConns(dbConfig.MaxIdleConns)
-	db.SetConnMaxLifetime(dbConfig.ConnMaxLifetime)
-
-	return dbConfig, nil
+	return nil
 }

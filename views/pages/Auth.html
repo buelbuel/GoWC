@@ -1,54 +1,15 @@
 {{ define "AuthPageContent" }}
 <section class="auth-page">
-    <div class="auth-page__form">
-        <div class="container">
-            <gowc-auth-form></gowc-auth-form>
-        </div>
+  <div class="auth-page__form">
+    <div class="container">
+      <gowc-auth-form></gowc-auth-form>
     </div>
-    <div class="auth-page__features">
-        <div class="container">
-            <h2>Key Features</h2>
-            <ul>
-                <li>🚀 High-performance Go backend</li>
-                <li>🔒 JWT authentication</li>
-                <li>🌐 Web Components for modular UI</li>
-                <li>📦 Easy to set up and extend</li>
-            </ul>
-        </div>
-    </div>
+  </div>
 </section>
 
 <style>
-    .auth-page__form,
-    .auth-page__features {
-        padding: 4rem 0;
-        text-align: center;
-    }
-
-    .auth-page__form {
-        background-color: var(--color-gray-200);
-
-        @media (prefers-color-scheme: light) {
-            background-color: var(--color-white);
-        }
-    }
-
-    .auth-page__features {
-        background-color: var(--color-teal-600);
-
-        & ul {
-            list-style-type: none;
-            display: flex;
-            flex-direction: column;
-
-            & li {
-                font-weight: var(--font-weight-semibold);
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            background-color: var(--color-teal-400);
-        }
-    }
+  .auth-page__form {
+    padding: 4rem 0;
+  }
 </style>
 {{ end }}

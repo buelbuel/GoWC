@@ -1,7 +1,6 @@
 package config
 
 import (
-	"errors"
 	"os"
 	"time"
 
@@ -16,33 +15,27 @@ type JwtCustomClaims struct {
 }
 
 type JwtConfig struct {
-	SecretKey string
+	SecretKey      string        `toml:"JwtSecretKey"`
+	ExpirationTime time.Duration `toml:"JwtExpirationTime"`
 }
 
-func NewJwtConfig() *JwtConfig {
+func NewJwtConfig() (*JwtConfig, error) {
+	config := &JwtConfig{}
 	configFile, err := os.ReadFile("config.toml")
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	var config struct {
-		Server struct {
-			JwtSecretKey string `toml:"jwt_secret_key"`
-		}
+	if err := toml.Unmarshal(configFile, config); err != nil {
+		return nil, err
 	}
 
-	if err := toml.Unmarshal(configFile, &config); err != nil {
-		panic(err)
-	}
-
-	return &JwtConfig{
-		SecretKey: config.Server.JwtSecretKey,
-	}
+	return config, nil
 }
 
 func (claims *JwtCustomClaims) Valid() error {
 	if claims.ExpiresAt == nil || claims.ExpiresAt.Time.Before(time.Now()) {
-		return errors.New("token has expired")
+		return jwt.ErrTokenExpired
 	}
 	return nil
 }

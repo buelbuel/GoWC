@@ -19,6 +19,7 @@ class NavMainComponent extends HTMLElement {
             z-index: 1;
             padding: 0;
             backdrop-filter: blur(1rem);
+            -webkit-backdrop-filter: blur(1rem);
             transition: box-shadow 0.3s ease, background-color 0.3s ease;
 
             @media (min-width: 656px) {

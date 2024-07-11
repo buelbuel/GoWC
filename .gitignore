@@ -19,3 +19,5 @@ vendor/
 *.pem
 
 config.toml
+
+.DS_Store

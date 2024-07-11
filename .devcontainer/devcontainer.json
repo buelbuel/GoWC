@@ -12,7 +12,18 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "sudo apt-get update -y && sudo apt-get upgrade -y && go mod download && go install github.com/air-verse/air@latest"
+	"postCreateCommand": "sudo apt-get update -y && sudo apt-get upgrade -y && go mod download && go install github.com/air-verse/air@latest",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"nicolasparada.innerhtml",
+				"usernamehw.errorlens",
+				"jinliming2.vscode-go-template",
+				"ecmel.vscode-html-css",
+				"golang.go-nightly"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},

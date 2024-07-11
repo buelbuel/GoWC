@@ -1,8 +1,8 @@
 class CardHeaderComponent extends HTMLElement {
-    connectedCallback() {
-      this.attachShadow({ mode: 'open' });
-      const title = this.getAttribute('title') || '';
-      this.shadowRoot.innerHTML = `
+  connectedCallback() {
+    this.attachShadow({ mode: "open" });
+    const title = this.getAttribute("title") || "";
+    this.shadowRoot.innerHTML = `
         <div class="card-header">
           <h2>${title}</h2>
           <slot></slot>
@@ -18,7 +18,7 @@ class CardHeaderComponent extends HTMLElement {
           }
         </style>
       `;
-    }
   }
-  
-  customElements.define('gowc-card-header', CardHeaderComponent);
+}
+
+customElements.define("gowc-card-header", CardHeaderComponent);

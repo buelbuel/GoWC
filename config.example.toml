@@ -43,9 +43,9 @@ Url = "postgres://user:password@localhost/db?sslmode=disable"
 # Maximum number of open connections to the database
 MaxConns = 10
 # Maximum number of idle connections in the pool
-MaxIdleConns = 10
+MaxIdleConns = 5
 # Maximum amount of time a connection may be reused
-ConnMaxLifetime = "10h"
+ConnMaxLifetime = "1h"
 
 [StaticPaths]
 # Paths for serving static files

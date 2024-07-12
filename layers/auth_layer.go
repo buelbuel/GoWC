@@ -3,8 +3,8 @@ package layers
 import (
 	"time"
 
-	config "github.com/buelbuel/gowc/internal/config"
-	utils "github.com/buelbuel/gowc/internal/utils"
+	config "github.com/buelbuel/gowc/config"
+	utils "github.com/buelbuel/gowc/utils"
 	"github.com/golang-jwt/jwt"
 	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"

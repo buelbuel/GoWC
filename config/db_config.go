@@ -2,6 +2,7 @@ package config
 
 import (
 	"database/sql"
+	"log"
 	"os"
 	"time"
 
@@ -9,23 +10,24 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
-// NewDatabaseConfig creates a new instance of [DatabaseConfig] with the provided parameters.
+// DBConfig creates a new instance of [DatabaseConfig] with the provided parameters.
 //
 // Parameters:
-//   - host: The hostname of the database server
-//   - port: The port number of the database server
-//   - user: The username for database authentication
-//   - password: The password for database authentication
-//   - dbName: The name of the database to connect to
+//   - Url: The hostname of the database server
+//   - MaxConns: The port number of the database server
+//   - MaxIdleConns: The username for database authentication
+//   - ConnMaxLifetime: The password for database authentication
 //
 // Returns:
-//   - *DatabaseConfig: A pointer to the new DatabaseConfig instance
+//   - *DBConfig: A pointer to the created [DBConfig] instance
 type DBConfig struct {
-	DatabaseURL     string        `toml:"Url"`
-	MaxConns        int           `toml:"MaxConns"`
-	MaxIdleConns    int           `toml:"MaxIdleConns"`
-	ConnMaxLifetime time.Duration `toml:"ConnMaxLifetime"`
-	DB              *sql.DB       `toml:"-"`
+	Database struct {
+		URL             string        `toml:"URL"`
+		MaxConns        int           `toml:"MaxConns"`
+		MaxIdleConns    int           `toml:"MaxIdleConns"`
+		ConnMaxLifetime time.Duration `toml:"ConnMaxLifetime"`
+	} `toml:"Database"`
+	DB *sql.DB `toml:"-"`
 }
 
 // NewDBConfig creates a new DBConfig instance by reading the configuration from a toml file.
@@ -36,12 +38,18 @@ func NewDBConfig() (*DBConfig, error) {
 	config := &DBConfig{}
 	configFile, err := os.ReadFile("config.toml")
 	if err != nil {
+		log.Printf("Error reading config file: %v", err)
+		return nil, err
+	}
+	log.Printf("Config file contents: %s", string(configFile))
+
+	if err := toml.Unmarshal(configFile, config); err != nil {
+		log.Printf("Error unmarshaling config: %v", err)
 		return nil, err
 	}
 
-	if err := toml.Unmarshal(configFile, config); err != nil {
-		return nil, err
-	}
+	log.Printf("Loaded database URL: %s", config.Database.URL)
+	log.Printf("Full config: %+v", config)
 
 	return config, nil
 }
@@ -50,15 +58,15 @@ func NewDBConfig() (*DBConfig, error) {
 // It opens a database connection using the provided [DBConfig]'s [DatabaseURL] and sets the maximum number of open connections,
 // maximum idle connections, and connection maximum lifetime.
 func (config *DBConfig) Initialize() error {
-	db, err := sql.Open("postgres", config.DatabaseURL)
+	db, err := sql.Open("postgres", config.Database.URL)
 	if err != nil {
 		return err
 	}
 
 	config.DB = db
-	config.DB.SetMaxOpenConns(config.MaxConns)
-	config.DB.SetMaxIdleConns(config.MaxIdleConns)
-	config.DB.SetConnMaxLifetime(config.ConnMaxLifetime)
+	config.DB.SetMaxOpenConns(config.Database.MaxConns)
+	config.DB.SetMaxIdleConns(config.Database.MaxIdleConns)
+	config.DB.SetConnMaxLifetime(config.Database.ConnMaxLifetime)
 
 	return nil
 }

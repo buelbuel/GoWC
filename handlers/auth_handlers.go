@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	config "github.com/buelbuel/gowc/internal/config"
-	models "github.com/buelbuel/gowc/internal/models"
-	utils "github.com/buelbuel/gowc/internal/utils"
+	config "github.com/buelbuel/gowc/config"
+	models "github.com/buelbuel/gowc/models"
+	utils "github.com/buelbuel/gowc/utils"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
 	"golang.org/x/crypto/bcrypt"

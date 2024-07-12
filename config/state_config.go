@@ -3,7 +3,7 @@ package config
 import (
 	"os"
 
-	utils "github.com/buelbuel/gowc/internal/utils"
+	utils "github.com/buelbuel/gowc/utils"
 	"github.com/pelletier/go-toml"
 )
 

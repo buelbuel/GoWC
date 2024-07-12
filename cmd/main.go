@@ -1,16 +1,30 @@
 package main
 
 import (
-	config "github.com/buelbuel/gowc/internal/config"
-	handlers "github.com/buelbuel/gowc/internal/handlers"
-	models "github.com/buelbuel/gowc/internal/models"
-	routes "github.com/buelbuel/gowc/internal/routes"
+	config "github.com/buelbuel/gowc/config"
+	handlers "github.com/buelbuel/gowc/handlers"
+	models "github.com/buelbuel/gowc/models"
+	routes "github.com/buelbuel/gowc/routes"
 	"github.com/labstack/echo/v4"
 	_ "github.com/lib/pq"
+
+	"flag"
+	"os"
+
+	migrate "github.com/buelbuel/gowc/cmd/migrate"
 )
 
 // main is the entry point for the web application.
 func main() {
+	migrateFlag := flag.String("migrate", "", "Run database migrations: up or down")
+	flag.Parse()
+
+	if *migrateFlag != "" {
+		os.Args = []string{os.Args[0], "-direction", *migrateFlag}
+		migrate.Run()
+		return
+	}
+
 	echo := echo.New()
 
 	// Load the application configuration.

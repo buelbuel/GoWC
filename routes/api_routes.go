@@ -1,10 +1,10 @@
 package routes
 
 import (
-	config "github.com/buelbuel/gowc/internal/config"
-	handlers "github.com/buelbuel/gowc/internal/handlers"
-	layers "github.com/buelbuel/gowc/internal/layers"
-	utils "github.com/buelbuel/gowc/internal/utils"
+	config "github.com/buelbuel/gowc/config"
+	handlers "github.com/buelbuel/gowc/handlers"
+	layers "github.com/buelbuel/gowc/layers"
+	utils "github.com/buelbuel/gowc/utils"
 	"github.com/labstack/echo/v4"
 )
 

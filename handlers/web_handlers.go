@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	utils "github.com/buelbuel/gowc/internal/utils"
+	utils "github.com/buelbuel/gowc/utils"
 	"github.com/labstack/echo/v4"
 )
 

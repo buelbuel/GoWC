@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	models "github.com/buelbuel/gowc/internal/models"
+	models "github.com/buelbuel/gowc/models"
 	"github.com/labstack/echo/v4"
 )
 

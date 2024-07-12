@@ -1,13 +1,11 @@
-package main
+package migrate
 
 import (
-	"database/sql"
 	"flag"
 	"log"
 
-	config "github.com/buelbuel/gowc/internal/config"
-	migrations "github.com/buelbuel/gowc/internal/migrations"
-	_ "github.com/lib/pq"
+	config "github.com/buelbuel/gowc/config"
+	migrations "github.com/buelbuel/gowc/migrations"
 )
 
 // MigrationDirection represents the direction of a migration.
@@ -19,42 +17,47 @@ const (
 	MigrationDirectionDown MigrationDirection = "down"
 )
 
-// main is the entry point for the migration tool.
-func main() {
+// Run is the entry point for the migration tool.
+func Run() {
 	direction := flag.String("direction", "up", "Migration direction: up or down")
 	flag.Parse()
 
 	dbConfig, err := config.NewDBConfig()
-	checkError("Failed to load database configuration", err)
+	if err != nil {
+		log.Fatalf("Failed to load database configuration: %v", err)
+	}
 
-	db, err := sql.Open("postgres", dbConfig.DatabaseURL)
-	checkError("Failed to connect to database", err)
-	defer db.Close()
+	if dbConfig.Database.URL == "" {
+		log.Fatalf("Database URL is empty. Please check your config.toml file.")
+	}
 
-	runner := migrations.NewMigrationRunner(db)
+	err = dbConfig.Initialize()
+	if err != nil {
+		log.Fatalf("Failed to initialize database connection: %v", err)
+	}
+	defer dbConfig.DB.Close()
+
+	runner := migrations.NewMigrationRunner(dbConfig.DB)
 
 	migrationsToRun := []migrations.Migration{
 		&migrations.CreateUsersTable{},
-		// More migrations can be added here
+		// Add more migrations here as needed
 	}
 
 	switch MigrationDirection(*direction) {
 	case MigrationDirectionUp:
 		err = runner.RunMigrations(migrationsToRun)
-		checkError("Failed to run migrations", err)
+		if err != nil {
+			log.Fatalf("Failed to run migrations: %v", err)
+		}
 		log.Println("Migrations applied successfully")
 	case MigrationDirectionDown:
 		err = runner.RevertMigrations(migrationsToRun)
-		checkError("Failed to revert migrations", err)
+		if err != nil {
+			log.Fatalf("Failed to revert migrations: %v", err)
+		}
 		log.Println("Migrations reverted successfully")
 	default:
 		log.Fatalf("Invalid direction: %s. Use 'up' or 'down'.", *direction)
-	}
-}
-
-// checkError checks if an error occurred and logs it.
-func checkError(message string, err error) {
-	if err != nil {
-		log.Fatalf("%s: %v", message, err)
 	}
 }

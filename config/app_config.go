@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	utils "github.com/buelbuel/gowc/internal/utils"
+	utils "github.com/buelbuel/gowc/utils"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"

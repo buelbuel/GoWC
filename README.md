@@ -32,7 +32,7 @@ This repository contains a boilerplate for a basic MVC style web application usi
 3. Set up your database and update the configuration in `config.toml`.
 4. Run database migrations:
     ```bash
-    go run cmd/migrate/main.go -direction up
+    go run cmd/main.go -migrate up
     ```
 5. Run the application:
     ```bash
@@ -77,13 +77,13 @@ The application includes a migration tool to manage database schema changes. To 
 - To apply migrations:
 
 ```bash
-go run cmd/migrate/main.go -direction up
+go run cmd/main.go -migrate up
 ```
 
 - To roll back migrations:
 
 ```bash
-go run cmd/migrate/main.go -direction down
+go run cmd/main.go -migrate down
 ```
 
 Migrations are defined in the `internal/migrations` package. To add a new migration, create a new struct that implements the `Migration` interface and add it to the `migrationsToRun` slice in `cmd/migrate/main.go`.

@@ -13,14 +13,22 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// AuthHandlers represents the handlers for authentication.
+// AuthHandlers represents the handlers for authentication operations.
+// It contains methods for user registration, login, logout, and token refresh.
+//
+// The struct holds references to:
+//   - State: Application state for managing things like blacklisted tokens
+//   - UserModel: Interface for user-related database operations
+//   - JwtConfig: Configuration for JWT token generation and validation
 type AuthHandlers struct {
 	State     *utils.State
 	UserModel models.UserInterface
 	JwtConfig *config.JwtConfig
 }
 
-// NewAuthHandlers creates a new instance of AuthHandlers.
+// NewAuthHandlers creates a new instance of [AuthHandlers].
+// It takes a pointer to the application state, a user model interface, and a JWT configuration.
+// It returns a pointer to an [AuthHandlers] instance.
 func NewAuthHandlers(state *utils.State, userModel models.UserInterface, jwtConfig *config.JwtConfig) *AuthHandlers {
 	return &AuthHandlers{
 		State:     state,
@@ -29,7 +37,20 @@ func NewAuthHandlers(state *utils.State, userModel models.UserInterface, jwtConf
 	}
 }
 
-// RegisterHandler handles the registration request.
+// RegisterHandler processes user registration requests.
+//
+// It performs the following steps:
+//  1. Binds the incoming JSON request to a struct containing username, email, and password.
+//  2. Validates that all required fields are present.
+//  3. Hashes the provided password using bcrypt.
+//  4. Creates a new user record in the database.
+//  5. Returns a JSON response indicating success or failure.
+//
+// Error cases:
+//   - Returns 400 Bad Request if the input is invalid or missing required fields.
+//   - Returns 500 Internal Server Error if there's a failure in password hashing or user creation.
+//
+// On success, it returns a 201 Created status with a success message.
 func (handler *AuthHandlers) RegisterHandler(context echo.Context) error {
 	var registerData struct {
 		Username string `json:"username"`
@@ -72,7 +93,21 @@ func (handler *AuthHandlers) RegisterHandler(context echo.Context) error {
 	return context.JSON(http.StatusCreated, map[string]string{"message": "User registered successfully"})
 }
 
-// LoginHandler handles the login request.
+// LoginHandler processes user login requests.
+//
+// It performs the following steps:
+//  1. Binds the incoming JSON request to a struct containing email and password.
+//  2. Retrieves the user from the database using the provided email.
+//  3. Compares the provided password with the stored hashed password.
+//  4. Generates a JWT token upon successful authentication.
+//  5. Returns the JWT token in the response.
+//
+// Error cases:
+//   - Returns 400 Bad Request if the input is invalid.
+//   - Returns 401 Unauthorized if the credentials are invalid.
+//   - Returns 500 Internal Server Error if there's a failure in token generation.
+//
+// On success, it returns a 200 OK status with the JWT token.
 func (handler *AuthHandlers) LoginHandler(context echo.Context) error {
 	var loginData struct {
 		Email    string `json:"email"`
@@ -119,7 +154,19 @@ func (handler *AuthHandlers) LoginHandler(context echo.Context) error {
 	return context.JSON(http.StatusOK, map[string]string{"token": tokenEncoded})
 }
 
-// RefreshToken handles the refresh token request.
+// RefreshToken handles the token refresh process.
+//
+// It performs the following steps:
+//  1. Parses and validates the provided refresh token.
+//  2. Extracts claims from the valid token.
+//  3. Creates a new token with updated expiration time.
+//  4. Returns the new token in the response.
+//
+// Error cases:
+//   - Returns 401 Unauthorized if the refresh token is invalid or expired.
+//   - Returns 500 Internal Server Error if there's a failure in generating the new token.
+//
+// On success, it returns a 200 OK status with the new JWT token.
 func (handler *AuthHandlers) RefreshToken(context echo.Context) error {
 	refreshToken := context.FormValue("refresh_token")
 	token, err := jwt.Parse(refreshToken, func(token *jwt.Token) (interface{}, error) {
@@ -161,7 +208,16 @@ func (handler *AuthHandlers) RefreshToken(context echo.Context) error {
 	return context.JSON(http.StatusUnauthorized, map[string]string{"error": "Invalid refresh token"})
 }
 
-// LogoutHandler handles the logout request.
+// LogoutHandler processes user logout requests.
+//
+// It performs the following steps:
+//  1. Retrieves the current JWT token from the request context.
+//  2. Adds the token to a blacklist with an expiration time.
+//  3. Updates the application state with the blacklisted token.
+//
+// This method effectively invalidates the token for future use.
+//
+// On success, it returns a 200 OK status with a logout confirmation message.
 func (handler *AuthHandlers) LogoutHandler(context echo.Context) error {
 	token := context.Get("user").(*jwt.Token)
 
@@ -174,13 +230,24 @@ func (handler *AuthHandlers) LogoutHandler(context echo.Context) error {
 	return context.JSON(http.StatusOK, map[string]string{"message": "Logged out successfully"})
 }
 
-// Accessible handles the accessible request.
+// Accessible is a handler for testing publicly accessible endpoints.
+//
+// This handler doesn't require authentication and always returns a successful response.
+// It's typically used for health checks or public API endpoints.
+//
+// Returns a 200 OK status with a simple text message.
 func (handler *AuthHandlers) Accessible(context echo.Context) error {
 	context.Logger().Info("Accessible")
 	return context.String(http.StatusOK, "Accessible")
 }
 
-// Restricted handles the restricted request.
+// Restricted is a handler for testing authenticated endpoints.
+//
+// This handler requires a valid JWT token to access. It demonstrates how to:
+//  1. Retrieve the authenticated user's information from the JWT claims.
+//  2. Use the user's information in the response.
+//
+// Returns a 200 OK status with a personalized welcome message.
 func (handler *AuthHandlers) Restricted(context echo.Context) error {
 	user := context.Get("user").(*jwt.Token)
 	claims := user.Claims.(*config.JwtCustomClaims)

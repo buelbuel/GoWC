@@ -7,7 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// AuthPageHandler handles the authentication page.
+// AuthPageHandler displays the authentication page.
 func AuthPageHandler(context echo.Context) error {
 	return utils.RenderPage(context, "Auth", "AuthPageContent", "FrontLayout")
 }
@@ -22,17 +22,17 @@ func RegisterFormHandler(context echo.Context) error {
 	return context.HTML(http.StatusOK, `<login-form></login-form>`)
 }
 
-// StartPageHandler handles the start page.
+// StartPageHandler displays the start page.
 func StartPageHandler(context echo.Context) error {
 	return utils.RenderPage(context, "Start", "startPageContent", "FrontLayout")
 }
 
-// DashboardPageHandler handles the dashboard page.
+// DashboardPageHandler displays the dashboard page.
 func DashboardPageHandler(context echo.Context) error {
 	return utils.RenderPage(context, "Dashboard", "dashboardPageContent", "AppLayout")
 }
 
-// ProfilePageHandler handles the profile page.
+// ProfilePageHandler displays the profile page.
 func ProfilePageHandler(context echo.Context) error {
 	return utils.RenderPage(context, "Profile", "profilePageContent", "AppLayout")
 }

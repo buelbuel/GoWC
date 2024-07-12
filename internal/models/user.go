@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// User represents a user.
 type User struct {
 	ID        string
 	Email     string
@@ -20,6 +21,7 @@ type User struct {
 	DeletedAt time.Time
 }
 
+// UserInterface represents the interface for user-related operations.
 type UserInterface interface {
 	CreateUser(user *User) error
 	GetUser(id string) (*User, error)
@@ -28,15 +30,18 @@ type UserInterface interface {
 	GetUserByEmail(email string) (*User, error)
 }
 
+// UserModel represents the model for users.
 type UserModel struct {
 	DB     *sql.DB
 	Logger echo.Logger
 }
 
+// NewUserModel creates a new UserModel.
 func NewUserModel(db *sql.DB, logger echo.Logger) *UserModel {
 	return &UserModel{DB: db, Logger: logger}
 }
 
+// CreateUser creates a new user.
 func (model *UserModel) CreateUser(user *User) error {
 	user.CreatedAt = time.Now()
 	user.IsActive = true
@@ -57,6 +62,7 @@ func (model *UserModel) CreateUser(user *User) error {
 	return nil
 }
 
+// GetUser gets a user by ID.
 func (model *UserModel) GetUser(id string) (*User, error) {
 	user := &User{}
 	query := `SELECT id, email, username, password, admin, is_active, created_at, updated_at 
@@ -73,6 +79,7 @@ func (model *UserModel) GetUser(id string) (*User, error) {
 	return user, nil
 }
 
+// UpdateUser updates a user.
 func (model *UserModel) UpdateUser(user *User) error {
 	user.UpdatedAt = time.Now()
 
@@ -84,12 +91,14 @@ func (model *UserModel) UpdateUser(user *User) error {
 	return err
 }
 
+// DeleteUser deletes a user.
 func (model *UserModel) DeleteUser(id string) error {
 	query := `UPDATE public.users SET is_deleted = true, deleted_at = now() WHERE id = $1`
 	_, err := model.DB.Exec(query, id)
 	return err
 }
 
+// GetUserByEmail gets a user by email.
 func (model *UserModel) GetUserByEmail(email string) (*User, error) {
 	user := &User{}
 	query := `SELECT id, email, username, password, admin, is_active, created_at, updated_at 

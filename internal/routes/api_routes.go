@@ -1,4 +1,3 @@
-// internal/routes/api_routes.go
 package routes
 
 import (
@@ -9,7 +8,20 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func ApiRoutes(
+// APIRoutes sets up all the API routes for the application.
+// It defines both public and protected API endpoints, associating them with their respective handlers.
+//
+// Parameters:
+//   - echo: The Echo instance to register routes on.
+//   - state: The application state, which can be used in handlers if needed.
+//   - jwtConfig: JWT configuration for authentication.
+//   - userHandlers: Handlers for user-related operations.
+//   - authHandlers: Handlers for authentication-related operations.
+//
+// This function separates routes into two main categories:
+// 1. Public routes: Accessible without authentication.
+// 2. Protected routes: Require authentication to access.
+func APIRoutes(
 	echo *echo.Echo,
 	state *utils.State,
 	jwtConfig *config.JwtConfig,
@@ -17,10 +29,12 @@ func ApiRoutes(
 	authHandlers *handlers.AuthHandlers,
 ) {
 	// Public routes
+	// These API endpoints are accessible without authentication
 	echo.POST("/api/login", authHandlers.LoginHandler)
 	echo.POST("/api/register", authHandlers.RegisterHandler)
 
 	// Protected routes
+	// These API endpoints require authentication to access
 	auth := echo.Group("/api")
 	auth.Use(layers.RequireAuth(jwtConfig))
 	auth.Use(layers.CheckBlacklist(state))

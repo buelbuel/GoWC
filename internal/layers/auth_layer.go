@@ -10,12 +10,16 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// RequireAuth requires a valid JWT token to access the route.
+// It returns an echo.MiddlewareFunc that can be used as a middleware for echo.
 func RequireAuth(jwtConfig *config.JwtConfig) echo.MiddlewareFunc {
 	return echojwt.WithConfig(echojwt.Config{
 		SigningKey: []byte(jwtConfig.SecretKey),
 	})
 }
 
+// CheckBlacklist checks if the token is blacklisted.
+// It returns an echo.MiddlewareFunc that can be used as a middleware for echo.
 func CheckBlacklist(state *utils.State) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(context echo.Context) error {

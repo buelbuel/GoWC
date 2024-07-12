@@ -26,6 +26,10 @@ EnableCORS = false
 CORSAllowOrigins = ["https://example.com"]
 # Allowed methods for CORS
 CORSAllowMethods = ["GET", "PUT", "POST", "DELETE"]
+# Maximum Rate Limit
+RateLimit = 1000.0
+# Maximum Rate Burst
+RateBurst = 100
 
 [Auth]
 # Secret key for JWT token generation
@@ -45,9 +49,9 @@ ConnMaxLifetime = "10h"
 
 [StaticPaths]
 # Paths for serving static files
-css = "public/css"
-js = "public/js"
-images = "public/images"
+css = "resources/css"
+js = "resources/js"
+images = "resources/images"
 
 [State]
 # Initial application state

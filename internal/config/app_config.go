@@ -1,6 +1,7 @@
 package config
 
 import (
+	"io"
 	"os"
 	"strings"
 
@@ -10,9 +11,12 @@ import (
 	"github.com/labstack/gommon/log"
 	"github.com/pelletier/go-toml"
 	"golang.org/x/crypto/acme/autocert"
+	"golang.org/x/time/rate"
 )
 
-// AppConfig represents the configuration for the application.
+// AppConfig represents the application configuration.
+// It contains various settings for server, logging, TLS, CORS, and rate limiting.
+// These are mapped with toml tags from which the config is read in [NewAppConfig].
 type AppConfig struct {
 	ServerAddress    string            `toml:"ServerAddress"`
 	StaticPaths      map[string]string `toml:"StaticPaths"`
@@ -33,7 +37,13 @@ type AppConfig struct {
 	RateBurst        int               `toml:"RateBurst"`
 }
 
-// NewAppConfig creates a new instance of AppConfig.
+// NewAppConfig creates a new instance of [AppConfig] by reading from the config.toml file.
+// It reads the config.toml file from the root directory and unmarshals the TOML data into an [AppConfig] instance.
+// If the file is not found or cannot be read, it returns an error.
+//
+// Returns:
+//   - *AppConfig: A pointer to the loaded configuration
+//   - error: An error if the configuration file cannot be read or parsed
 func NewAppConfig() (*AppConfig, error) {
 	config := &AppConfig{}
 	configFile, err := os.ReadFile("config.toml")
@@ -48,47 +58,76 @@ func NewAppConfig() (*AppConfig, error) {
 	return config, nil
 }
 
-// SetupStaticFiles sets up the static files for the application.
-func (config *AppConfig) SetupStaticFiles(echo *echo.Echo) {
-	for route, path := range config.StaticPaths {
-		echo.Static(route, path)
-	}
-}
-
-// SetupMiddleware sets up the middleware for the application.
+// SetupMiddleware configures and sets up the middleware for the [echo.Echo] instance.
+// This is where the middleware is set up, such as logging, CORS, and rate limiting.
+// It takes a pointer to an [AppConfig] instance and an [echo.Echo] instance as arguments.
 func (config *AppConfig) SetupMiddleware(echo *echo.Echo) {
+	// Setup logging middleware if enabled
 	if config.UseLogger {
-		loggerConfig := middleware.LoggerConfig{
-			Format: "{\n\t\"time\":\"${time_rfc3339}\",\n\t\"id\":\"${id}\",\n\t\"remote_ip\":\"${remote_ip}\",\n\t\"host\":\"${host}\",\n\t\"method\":\"${method}\",\n\t\"uri\":\"${uri}\",\n\t\"status\":${status},\n\t\"error\":\"${error}\",\n\t\"latency\":${latency},\n\t\"latency_human\":\"${latency_human}\",\n\t\"bytes_in\":${bytes_in},\n\t\"bytes_out\":${bytes_out},\n\t\"user_agent\":\"${user_agent}\"\n},\n",
-		}
-		echo.Logger.SetLevel(log.DEBUG)
-
-		if config.LogOutput == "file" {
-			file, err := os.OpenFile(config.LogFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-			if err != nil {
-				echo.Logger.Fatal(err)
-			}
-
-			loggerConfig.Output = file
-		} else if config.LogOutput == "stdout" {
-			loggerConfig.Output = os.Stdout
-		}
-
-		if config.ColorizeLogger {
-			loggerConfig.Format = colorizeLogFormat(loggerConfig.Format)
-		}
-
-		echo.Use(middleware.LoggerWithConfig(loggerConfig))
+		echo.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+			Format: config.getLogFormat(),
+			Output: config.getLogOutput(),
+		}))
 	}
 
+	// Setup CORS middleware if enabled
 	if config.EnableCORS {
 		echo.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 			AllowOrigins: config.CORSAllowOrigins,
 			AllowMethods: config.CORSAllowMethods,
 		}))
 	}
+
+	// Setup rate limiting middleware
+	echo.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(rate.Limit(config.RateLimit))))
 }
 
+// SetupStaticFiles configures static file serving for the [echo.Echo] instance.
+// It takes a pointer to an [AppConfig] instance and an [echo.Echo] instance as arguments.
+// It sets up static file serving for each route specified in the [AppConfig]'s [StaticPaths] map.
+func (config *AppConfig) SetupStaticFiles(echo *echo.Echo) {
+	for route, path := range config.StaticPaths {
+		echo.Static(route, path)
+	}
+}
+
+// getLogFormat returns the log format string, optionally colorized.
+// It returns the log format string based on the [AppConfig]'s [UseLogger] and [ColorizeLogger] settings.
+func (config *AppConfig) getLogFormat() string {
+	format := `{"time":"${time_rfc3339_nano}","id":"${id}","remote_ip":"${remote_ip}",` +
+		`"host":"${host}","method":"${method}","uri":"${uri}","user_agent":"${user_agent}",` +
+		`"status":${status},"error":"${error}","latency":${latency},"latency_human":"${latency_human}"` +
+		`,"bytes_in":${bytes_in},"bytes_out":${bytes_out}}` + "\n"
+
+	if config.ColorizeLogger {
+		return colorizeLogFormat(format)
+	}
+	return format
+}
+
+// getLogOutput returns the appropriate [io.Writer] for logging based on configuration.
+// It returns the appropriate [io.Writer] based on the [AppConfig]'s [LogOutput] setting.
+// If the [LogOutput] is set to "file", it returns a file writer.
+// If the [LogOutput] is set to "stdout", it returns [os.Stdout].
+// Otherwise, it returns [os.Stderr].
+func (config *AppConfig) getLogOutput() io.Writer {
+	switch config.LogOutput {
+	case "file":
+		file, err := os.OpenFile(config.LogFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+		if err != nil {
+			log.Warn("Failed to log to file, using default stderr")
+			return os.Stderr
+		}
+		return file
+	case "stdout":
+		return os.Stdout
+	default:
+		return os.Stderr
+	}
+}
+
+// colorizeLogFormat adds ANSI color codes to the log format string.
+// It takes a string as an argument and returns the colorized string.
 func colorizeLogFormat(format string) string {
 	colorMap := map[string]string{
 		"time":          "\033[36m", // Cyan
@@ -114,11 +153,14 @@ func colorizeLogFormat(format string) string {
 }
 
 // SetupRenderer sets up the renderer for the application.
+// It takes an [echo.Echo] instance as an argument and sets its Renderer field.
 func (config *AppConfig) SetupRenderer(echo *echo.Echo) {
 	echo.Renderer = utils.NewTemplates()
 }
 
-// StartServer starts the server.
+// StartServer starts the server based on the configuration.
+// It handles different scenarios like AutoTLS, TLS, and standard HTTP.
+// It takes an [echo.Echo] instance as an argument.
 func (config *AppConfig) StartServer(echo *echo.Echo) {
 	address := config.ServerAddress
 

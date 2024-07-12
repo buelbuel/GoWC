@@ -8,16 +8,19 @@
 *.dylib
 *.test
 *.out
+*.work
+*.sum
+*.pem
+*.key
+*.crt
+*.csr
 
-go.work
-go.work.sum
+.DS_Store
+config.toml
 
 .sass-cache
 tmp/
 vendor/
 .prettier*
-*.pem
-
-config.toml
-
-.DS_Store
+.devcontainer/
+.github/

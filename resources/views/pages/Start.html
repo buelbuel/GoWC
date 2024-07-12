@@ -3,79 +3,82 @@
 <section class="start-page">
 	<div class="start-page__hero">
 		<div class="container">
-			<h1>👋 Start Page</h1>
-			<p>This is the front page, edit Start.html 📃 to get started.</p>
+			<h1>
+				👋 Start Page
+			</h1>
+			<p>
+				This is the front page, edit Start.html 📃 to get started.
+			</p>
+			<img
+				src="/images/screenshot.png"
+				alt="Screenshot"
+			/>
 		</div>
 	</div>
 	<div class="start-page__button-example">
 		<div class="container">
-			<h2>JS Controller Example</h2>
-			<p>Open the console and see what the Button do:</p>
-			
+			<h2>
+				JS Controller Example
+			</h2>
+			<p>
+				Open the console and see what the Button do:
+			</p>
+
 			<gowc-button
 				button-type="button"
 				variant="black"
-				text="👇"
-				controller="exampleController">
+				controller="exampleController"
+			>
+				👇
 			</gowc-button>
-			
-			<p>For an example integration, see:</p>
+
+			<p>
+				For an example integration, see:
+			</p>
 			<code class="start-page__code">
 				<span class="start-page__code---keyword">public</span>/<span class="start-page__code---keyword">controllers</span>/<span class="start-page__code---keyword">ExampleController.js</span>
 			</code>
-			<p>and</p>
+			<p>
+				and
+			</p>
 			<code class="start-page__code">
-				<span class="start-page__code---keyword">public</span>/<span class="start-page__code---keyword">js</span>/<span class="start-page__code---keyword">components</span>/<span class="start-page__code---keyword">GowcButton.js</span>
+				<span class="start-page__code---keyword">public</span>/<span class="start-page__code---keyword">js</span>/<span class="start-page__code---keyword">components</span>/<span class="start-page__code---keyword">ButtonComponent.js</span>
 			</code>
 		</div>
 	</div>
-	</div>
-	<div class="start-page__directory-structure">
+	<div class="start-page__documentation">
 		<div class="container">
-			<h2>Directory Structure</h2>
-			<p>This is the default structure of a new project 🏛️:</p>
+			<h2>
+				Documentation
+			</h2>
+			<p>
+				Head over to the <a href="/static/README.md" target="_blank">Readme</a> for more information.
+			</p>
 
 			<code class="start-page__code">
 				<span class="start-page__code---keyword">gowc</span>/<br />
 				├── <span class="start-page__code---keyword">cmd</span>/<br />
-				│ └── <span class="start-page__code---keyword">main.go</span> <span class="start-page__code---comment"># Application entry point</span><br />
+				│   ├── <span class="start-page__code---keyword">doc.go</span><br />
+				│   ├── <span class="start-page__code---keyword">main.go</span> <span class="start-page__code---comment"># Application entry point</span><br />
+				│   ├── <span class="start-page__code---keyword">migrate</span>/<br />
+				│   │	└── <span class="start-page__code---keyword">main.go</span><br />
+				├── <span class="start-page__code---keyword">config.toml</span><br />
+				├── <span class="start-page__code---keyword">go.mod</span><br />
+				├── <span class="start-page__code---keyword">go.sum</span><br />
 				├── <span class="start-page__code---keyword">internal</span>/<br />
-				│ ├── <span class="start-page__code---keyword">api</span>/<br />
-				│ │ ├── <span class="start-page__code---keyword">handlers</span>/ <span class="start-page__code---comment"># HTTP request handlers</span><br />
-				│ │ └── <span class="start-page__code---keyword">routes</span>/ <span class="start-page__code---comment"># Route definitions</span><br />
-				│ ├── <span class="start-page__code---keyword">config</span>/ <span class="start-page__code---comment"># Application configuration</span><br />
-				│ ├── <span class="start-page__code---keyword">middleware</span>/ <span class="start-page__code---comment"># Custom middleware</span><br />
-				│ └── <span class="start-page__code---keyword">utils</span>/ <span class="start-page__code---comment"># Utility functions</span><br />
-				├── <span class="start-page__code---keyword">public</span>/<br />
-				│ ├── <span class="start-page__code---keyword">css</span>/ <span class="start-page__code---comment"># CSS files</span><br />
-				│ └── <span class="start-page__code---keyword">js</span>/ <span class="start-page__code---comment"># JavaScript files</span><br />
-				├── <span class="start-page__code---keyword">views</span>/<br />
-				│ ├── <span class="start-page__code---keyword">components</span>/ <span class="start-page__code---comment"># Reusable components</span><br />
-				│ ├── <span class="start-page__code---keyword">layouts</span>/ <span class="start-page__code---comment"># Layout templates</span><br />
-				│ ├── <span class="start-page__code---keyword">pages</span>/ <span class="start-page__code---comment"># Page-specific templates</span><br />
-				│ └── <span class="start-page__code---keyword">partials</span>/ <span class="start-page__code---comment"># Reusable template components</span><br />
-				└── <span class="start-page__code---keyword">go.mod</span> <span class="start-page__code---comment"># Go module file</span><br />
+				│   ├── <span class="start-page__code---keyword">config</span>/ <span class="start-page__code---comment"># Application configuration</span><br />
+				│   ├── <span class="start-page__code---keyword">handlers</span>/ <span class="start-page__code---comment"># HTTP request handlers</span><br />
+				│   ├── <span class="start-page__code---keyword">layers</span>/ <span class="start-page__code---comment"># Custom middleware</span><br />
+				│   ├── <span class="start-page__code---keyword">migrations</span>/ <span class="start-page__code---comment"># Database migrations</span><br />
+				│   ├── <span class="start-page__code---keyword">models</span>/ <span class="start-page__code---comment"># Data models</span><br />
+				│   ├── <span class="start-page__code---keyword">routes</span>/ <span class="start-page__code---comment"># Route definitions</span><br />
+				│   └── <span class="start-page__code---keyword">utils</span>/ <span class="start-page__code---comment"># Utility functions</span><br />
+				├── <span class="start-page__code---keyword">resources</span>/<br />
+				│	├── <span class="start-page__code---keyword">css</span>/ <span class="start-page__code---comment"># CSS files</span><br />
+				│	├── <span class="start-page__code---keyword">images</span>/ <span class="start-page__code---comment"># Image assets</span><br />
+				│	├── <span class="start-page__code---keyword">js</span>/ <span class="start-page__code---comment"># JavaScript files</span><br />
+				│	└── <span class="start-page__code---keyword">views</span>/ <span class="start-page__code---comment"># HTML templates</span><br />
 			</code>
-		</div>
-	</div>
-	<div class="start-page__getting-started">
-		<div class="container">
-			<h2>Getting Started</h2>
-			<p>1. Clone the repository:</p>
-			<code class="start-page__code">
-        <span class="start-page__code---keyword">git clone</span> https://github.com/buelbuel/gowc.git<br />
-        <span class="start-page__code---keyword">cd</span> gowc
-      </code>
-			<p>2. Install dependencies:</p>
-			<code class="start-page__code">
-        <span class="start-page__code---keyword">go mod download</span><br />
-        <span class="start-page__code---keyword">go install</span> github.com/air-verse/air@latest
-      </code>
-			<p>3. Run the application:</p>
-			<code class="start-page__code">
-        <span class="start-page__code---keyword">air</span>
-      </code>
-			<p>4. Access the application at <a href="http://localhost:4000">http://localhost:4000</a></p>
 		</div>
 	</div>
 </section>
@@ -83,44 +86,60 @@
 <style>
 	.start-page__hero,
 	.start-page__button-example,
-	.start-page__directory-structure,
-	.start-page__getting-started {
+	.start-page__documentation {
 		padding: 4rem 0;
+	}
+
+	.start-page__hero {
+		text-align: center;
+
+		img {
+			width: 100%;
+			max-width: fit-content;
+			height: auto;
+			margin-bottom: -42rem;
+			z-index: 0;
+			transition: all 1s;
+
+			&:hover {
+				margin-bottom: -9rem;
+			}
+		}
 	}
 
 	.start-page__button-example {
 		background-color: var(--color-teal-800);
+		box-shadow: 0px -0.4rem 0.4rem rgba(var(--color-black-rgb), 0.05);
+		position: relative;
+		z-index: 1;
 
 		@media (prefers-color-scheme: light) {
 			background-color: var(--color-teal-300);
 		}
 	}
 
-	.start-page__getting-started {
-		background-color: var(--color-yellow-800);
-
-		@media (prefers-color-scheme: light) {
-			background-color: var(--color-yellow-400);
-		}
-	}
 
 	.start-page__code {
 		background-color: var(--color-gray-900);
 		padding: 1rem;
+		border-width: 2px;
+		border-style: solid;
+		border-color: var(--color-gray-600);
 		border-radius: 0.5rem;
-		color: var(--color-gray-500);
+		color: var(--color-gray-400);
 		display: block;
 		font-size: var(--font-size-sm);
 		line-height: 1.5;
 		font-family: var(--font-family-mono);
 
 		@media (prefers-color-scheme: light) {
+			border-color: var(--color-black);
 			color: var(--color-gray-200);
 		}
 	}
 
 	.start-page__code---keyword {
-		color: var(--color-teal-800);
+		color: var(--color-teal-600);
 		font-weight: var(--font-weight-bold);
 
 		@media (prefers-color-scheme: light) {

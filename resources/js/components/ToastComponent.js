@@ -21,10 +21,15 @@ class ToastComponent extends HTMLElement {
   render() {
     const type = this.getAttribute("type") || "success";
     const message = this.getAttribute("message") || "";
+
     this.shadowRoot.innerHTML = `
-      <div class="toast toast--${type}" id="toast">
+      <div
+        class="toast toast--${type}"
+        id="toast"
+      >
         ${message}
       </div>
+
       <style>
         .toast {
           padding: 1rem;
@@ -51,13 +56,13 @@ class ToastComponent extends HTMLElement {
   }
 
   show() {
-    this.shadowRoot.querySelector('.toast').classList.add('show');
+    this.shadowRoot.querySelector(".toast").classList.add("show");
     setTimeout(() => this.hide(), 3000);
   }
 
   hide() {
-    this.shadowRoot.querySelector('.toast').classList.remove('show');
+    this.shadowRoot.querySelector(".toast").classList.remove("show");
   }
 }
 
-customElements.define('gowc-toast', ToastComponent);
+customElements.define("gowc-toast", ToastComponent);

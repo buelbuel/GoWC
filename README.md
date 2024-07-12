@@ -1,4 +1,5 @@
 # Web Application Scaffolding with Echo Framework
+[![Go Reference](https://pkg.go.dev/badge/github.com/buelbuel/gowc.svg)](https://pkg.go.dev/github.com/buelbuel/gowc)
 
 This repository contains a boilerplate for a basic MVC style web application using the Echo Framework. The application utilizes native Go templates for rendering views, ensuring efficient server-side HTML generation. It also includes an example model, controller, and view for a user registration and authentication system with JSON Web Tokens for authentication.
 

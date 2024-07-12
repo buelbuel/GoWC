@@ -15,7 +15,6 @@ import (
 //   - echo: The Echo instance to register routes on.
 //   - state: The application state, which can be used in handlers if needed.
 //   - jwtConfig: JWT configuration for authentication.
-//   - userHandlers: Handlers for user-related operations.
 //   - authHandlers: Handlers for authentication-related operations.
 //
 // This function separates routes into two main categories:
@@ -25,22 +24,16 @@ func WebRoutes(
 	echo *echo.Echo,
 	state *utils.State,
 	jwtConfig *config.JwtConfig,
-	userHandlers *handlers.UserHandlers,
 	authHandlers *handlers.AuthHandlers,
 ) {
 	// Public routes
-	// These routes are accessible to all users without authentication
 	echo.GET("/", handlers.StartPageHandler)
 	echo.GET("/auth", handlers.AuthPageHandler)
-	echo.GET("/login-form", handlers.LoginFormHandler)
-	echo.GET("/register-form", handlers.RegisterFormHandler)
 	echo.POST("/api/register", authHandlers.RegisterHandler)
 	echo.POST("/api/login", authHandlers.LoginHandler)
-	echo.GET("/logout", authHandlers.LogoutHandler)
+	echo.GET("/api/logout", authHandlers.LogoutHandler)
 
 	// Protected routes
-	// These routes require authentication to access
-	// The RequireAuth middleware is applied to ensure only authenticated users can access these routes
 	app := echo.Group("/app", layers.RequireAuth(jwtConfig))
 	app.GET("/dashboard", handlers.DashboardPageHandler)
 	app.GET("/profile", handlers.ProfilePageHandler)

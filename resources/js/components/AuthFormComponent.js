@@ -17,40 +17,112 @@ class AuthFormComponent extends HTMLElement {
     const switchId = this.isLogin ? "switch-to-register" : "switch-to-login";
 
     this.shadowRoot.innerHTML = `
-      <gowc-card>
-        <gowc-card-header>${formType}</gowc-card-header>
-        <form id="auth-form">
-          ${
-            !this.isLogin
-              ? `
-              <gowc-label for="username">Username</gowc-label>
-              <gowc-input id="username" name="username" type="text" placeholder="Username" required></gowc-input>
-              <gowc-label for="email">Email</gowc-label>
-              <gowc-input id="email" name="email" type="email" placeholder="Email" required></gowc-input>
-              `
-              : `
-              <gowc-label for="email">Email</gowc-label>
-              <gowc-input id="email" name="email" type="email" placeholder="Email" required></gowc-input>
-              `
+      <div id="auth-card">
+        <gowc-card variant="default" padding="1.5rem" border-radius="md">
+          <gowc-card-header>
+            ${formType}
+          </gowc-card-header>
+          <form id="auth-form">
+            ${
+              !this.isLogin
+                ? `
+                <gowc-label for="username">
+                  Username
+                </gowc-label>
+                <gowc-input
+                  id="username"name="username"
+                  type="text"
+                  placeholder="Username"
+                  required
+                >
+                </gowc-input>
+                
+                <gowc-label for="email">
+                  Email
+                </gowc-label>
+                <gowc-input
+                  id="email"name="email"
+                  type="email"
+                  placeholder="Email"
+                  required
+                >
+                </gowc-input>
+                `
+                : `
+                <gowc-label for="email">
+                  Email
+                </gowc-label>
+                <gowc-input
+                  id="email"name="email"
+                  type="email"
+                  placeholder="Email"
+                  required
+                >
+                </gowc-input>
+                `
+            }
+
+            <gowc-label for="password">
+              Password
+            </gowc-label>
+            <gowc-input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+            >
+            </gowc-input>
+
+            <gowc-button
+              variant="black"
+              button-type="submit"
+            >
+              ${formType}
+            </gowc-button>
+          </form>
+          <p>
+            ${this.isLogin ? "No account?" : "Already have an account?"}
+            <a
+              href="#"
+              id="${switchId}"
+            >
+              ${switchText}
+            </a>
+          </p>
+        </gowc-card>
+      </div>
+      
+      <style>
+        #auth-card {
+          max-width: var(--breakpoint-sm);
+          margin: 0 auto;
+        }
+
+        a {
+          color: var(--color-blue-500);
+          text-decoration: none;
+          font-weight: bold;
+
+          &:hover {
+            text-decoration: underline;
           }
-          <gowc-label for="password">Password</gowc-label>
-          <gowc-input id="password" name="password" type="password" placeholder="Password" required></gowc-input>
-          <button type="submit">${formType}</button>
-        </form>
-        <p>${
-          this.isLogin ? "No account?" : "Already have an account?"
-        } <a href="#" id="${switchId}">${switchText}</a></p>
-      </gowc-card>
+        }
+      </style>
     `;
   }
 
   addEventListeners() {
-    const form = this.shadowRoot.querySelector("#auth-form");
     const switchLink = this.shadowRoot.querySelector(
       "#switch-to-register, #switch-to-login"
     );
+    const submitButton = this.shadowRoot.querySelector("gowc-button");
 
-    form.addEventListener("submit", this.handleSubmit.bind(this));
+    submitButton.addEventListener(
+      "gowc-button-click",
+      this.handleSubmit.bind(this)
+    );
+
     switchLink.addEventListener("click", this.toggleForm.bind(this));
     this.shadowRoot.addEventListener("gowc-input", this.handleInput.bind(this));
   }
@@ -105,7 +177,7 @@ class AuthFormComponent extends HTMLElement {
   toggleForm(event) {
     event.preventDefault();
     this.isLogin = !this.isLogin;
-    this.formData = {}; // Reset form data
+    this.formData = {};
     this.render();
     this.addEventListeners();
   }

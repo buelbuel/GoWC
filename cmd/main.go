@@ -43,7 +43,7 @@ func main() {
 	authHandlers := handlers.NewAuthHandlers(appState, userModel, jwtConfig)
 
 	// Setup the application routes.
-	routes.WebRoutes(echo, appState, jwtConfig, userHandlers, authHandlers)
+	routes.WebRoutes(echo, appState, jwtConfig, authHandlers)
 	routes.APIRoutes(echo, appState, jwtConfig, userHandlers, authHandlers)
 
 	appConfig.StartServer(echo)

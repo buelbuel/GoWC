@@ -1,10 +1,13 @@
 class LabelComponent extends HTMLElement {
   connectedCallback() {
-    const text = this.getAttribute("text") || "";
     const htmlFor = this.getAttribute("for") || "";
+
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
-        <label for="${htmlFor}"><slot></slot></label>
+        <label for="${htmlFor}">
+          <slot></slot>
+        </label>
+        
         <style>
           label {
             display: block;

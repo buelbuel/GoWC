@@ -94,10 +94,22 @@ func (config *AppConfig) SetupStaticFiles(echo *echo.Echo) {
 // getLogFormat returns the log format string, optionally colorized.
 // It returns the log format string based on the [AppConfig]'s [UseLogger] and [ColorizeLogger] settings.
 func (config *AppConfig) getLogFormat() string {
-	format := `{"time":"${time_rfc3339_nano}","id":"${id}","remote_ip":"${remote_ip}",` +
-		`"host":"${host}","method":"${method}","uri":"${uri}","user_agent":"${user_agent}",` +
-		`"status":${status},"error":"${error}","latency":${latency},"latency_human":"${latency_human}"` +
-		`,"bytes_in":${bytes_in},"bytes_out":${bytes_out}}` + "\n"
+	format := `
+{
+	"time":" ${time_rfc3339_nano}",
+	"id":"${id}",
+	"remote_ip":"${remote_ip}",
+	"host":"${host}",
+	"method":"${method}",
+	"uri":"${uri}",
+	"user_agent":"${user_agent}",
+	"status":${status},
+	"error":"${error}",
+	"latency":${latency},
+	"latency_human":"${latency_human}",
+	"bytes_in":${bytes_in},
+	"bytes_out":${bytes_out}
+},`
 
 	if config.ColorizeLogger {
 		return colorizeLogFormat(format)

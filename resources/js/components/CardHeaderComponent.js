@@ -1,19 +1,15 @@
 class CardHeaderComponent extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: "open" });
-    const title = this.getAttribute("title") || "";
     this.shadowRoot.innerHTML = `
-        <div class="card-header">
-          <h2>${title}</h2>
+        <h2 class="card-header">
           <slot></slot>
-        </div>
+        </h2>
+
         <style>
           .card-header {
-            margin-bottom: 1rem;
+            margin: 0 0 1rem 0;
             text-align: center;
-          }
-          .card-header h2 {
-            margin: 0;
             font-size: 1.5rem;
           }
         </style>

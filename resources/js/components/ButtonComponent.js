@@ -2,12 +2,18 @@ class ButtonComponent extends HTMLElement {
   connectedCallback() {
     const buttonType = this.getAttribute("button-type") || "button";
     const variant = this.getAttribute("variant") || "blue";
-    const text = this.getAttribute("text") || "";
     const controller = this.getAttribute("controller") || "";
 
     this.attachShadow({ mode: "open" });
     this.shadowRoot.innerHTML = `
-      <button type="${buttonType}" class="button button--${variant}" data-controller="${controller}">${text}</button>
+      <button
+        type="${buttonType}"
+        class="button button--${variant}"
+        data-controller="${controller}"
+      >
+        <slot></slot>
+      </button>
+
       <style>
         .button {
           padding: 0.5rem 1.5rem;
@@ -65,6 +71,19 @@ class ButtonComponent extends HTMLElement {
         }
       </style>
     `;
+
+    const button = this.shadowRoot.querySelector("button");
+    button.addEventListener("click", (event) => {
+      if (buttonType === "submit") {
+        event.preventDefault();
+        this.dispatchEvent(
+          new CustomEvent("gowc-button-click", {
+            bubbles: true,
+            composed: true,
+          })
+        );
+      }
+    });
   }
 }
 

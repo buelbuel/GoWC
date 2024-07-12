@@ -148,6 +148,7 @@ func (templ *Templates) Render(writer io.Writer, name string, data interface{}, 
 // Parameters:
 //   - context: The echo.Context for the current request.
 //   - title: The title of the page.
+//   - description: The description of the page.
 //   - contentBlock: The name of the content block to render within the layout.
 //   - layout: The name of the layout template to use.
 //
@@ -155,9 +156,10 @@ func (templ *Templates) Render(writer io.Writer, name string, data interface{}, 
 //   - An error if the rendering fails.
 //
 // This function is typically used in route handlers to render full pages with a consistent structure.
-func RenderPage(context echo.Context, title, contentBlock, layout string) error {
+func RenderPage(context echo.Context, title, description, contentBlock, layout string) error {
 	data := map[string]interface{}{
 		"Title":        title,
+		"Description":  description,
 		"ContentBlock": contentBlock,
 		"echoContext":  context,
 	}

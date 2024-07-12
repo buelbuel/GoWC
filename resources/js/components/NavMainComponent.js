@@ -1,22 +1,27 @@
 class NavMainComponent extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-        <nav id="nav__main" class="container">
+        <nav
+          id="nav__main"
+          class="container"
+        >
           <div class="nav__wrapper">
             <a href="/">
-              <span class="nav__logo">GoWC</span>
+              <span class="nav__logo">
+                GoWC
+              </span>
             </a>
             <ul class="nav__list"></ul>
           </div>
         </nav>
-        
+
         <style>
           #nav__main {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1;
+            z-index: 10;
             padding: 0;
             backdrop-filter: blur(1rem);
             -webkit-backdrop-filter: blur(1rem);
@@ -27,20 +32,20 @@ class NavMainComponent extends HTMLElement {
               top: 1rem;
             }
           }
-          
+
           .nav__wrapper {
             padding: 0.875rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
           }
-          
+
           .nav__logo {
             width: 125px;
             font-size: 2rem;
             color: var(--color-white);
             transition: text-shadow 0.3s ease;
-            
+
             @media (prefers-color-scheme: light) {
               color: var(--color-blue-700);
             }
@@ -53,7 +58,7 @@ class NavMainComponent extends HTMLElement {
               }
             }
           }
-                    
+
           .nav__list {
             display: inline-flex;
             gap: 1rem;
@@ -61,7 +66,7 @@ class NavMainComponent extends HTMLElement {
             align-items: center;
             list-style: none;
           }
-          
+
           .nav--scrolled {
             box-shadow: var(--shadow-md);
             background-color: rgba(var(--color-black-rgb), 0.7);
@@ -75,6 +80,7 @@ class NavMainComponent extends HTMLElement {
 
     const menuItems = JSON.parse(this.getAttribute("menu-items"));
     const navList = this.querySelector(".nav__list");
+
     menuItems.forEach((item) => {
       const li = document.createElement("li");
       const a = document.createElement("a");

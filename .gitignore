@@ -23,7 +23,6 @@ tmp/
 vendor/
 .prettier*
 .devcontainer/
-.github/
 
 main
 converage.txt

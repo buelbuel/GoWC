@@ -44,7 +44,7 @@ func (handler *UserHandlers) CreateUser(context echo.Context) error {
 	}
 
 	context.Logger().Info("User created successfully with ID: " + user.ID)
-	return context.JSON(http.StatusCreated, user)
+	return context.JSON(http.StatusCreated, map[string]string{"message": "User created successfully"})
 }
 
 // GetUser handles the HTTP GET request to retrieve a user by ID.
@@ -109,4 +109,16 @@ func (handler *UserHandlers) DeleteUser(context echo.Context) error {
 
 	context.Logger().Info("User deleted successfully with ID: " + id)
 	return context.NoContent(http.StatusNoContent)
+}
+
+func (handler *UserHandlers) GetUserByEmail(context echo.Context) error {
+	email := context.Param("email")
+	user, err := handler.UserModel.GetUserByEmail(email)
+	if err != nil {
+		context.Logger().Errorf("Failed to get user by email: %v", err)
+		return context.JSON(http.StatusNotFound, map[string]string{"error": "User not found"})
+	}
+
+	context.Logger().Info("User found with email: " + user.Email)
+	return context.JSON(http.StatusOK, user)
 }

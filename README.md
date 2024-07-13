@@ -1,5 +1,8 @@
 # Web Application Scaffolding with Echo Framework
 [![Go Reference](https://pkg.go.dev/badge/github.com/buelbuel/gowc.svg)](https://pkg.go.dev/github.com/buelbuel/gowc)
+[![codecov](https://codecov.io/github/buelbuel/GoWC/graph/badge.svg?token=0JOT2V6JCO)](https://codecov.io/github/buelbuel/GoWC)
+[![Go Report Card](https://goreportcard.com/badge/github.com/buelbuel/gowc)](https://goreportcard.com/report/github.com/buelbuel/gowc)
+![GitHub License](https://img.shields.io/github/license/buelbuel/gowc)
 
 This repository contains a boilerplate for a basic MVC style web application using the Echo Framework. The application utilizes native Go templates for rendering views, ensuring efficient server-side HTML generation. It also includes an example model, controller, and view for a user registration and authentication system with JSON Web Tokens for authentication.
 
@@ -201,8 +204,17 @@ The default structure of a new project is as follows:
 ```
 
 ## Contribution
+## Contribution
 
-Contributions to this project are welcome. Please refer to the contributing guidelines before making a pull request.
+Contributions to this project are welcome! Please follow these guidelines:
+
+1. Fork the repository and create a new branch for your contribution.
+2. Make your changes and ensure that the code is properly formatted.
+3. Write clear and concise commit messages.
+4. Test your changes thoroughly.
+5. Submit a pull request to the main repository.
+
+Thank you for your contribution!
 
 ## License
 

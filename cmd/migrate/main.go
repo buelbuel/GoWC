@@ -22,21 +22,21 @@ func Run() {
 	direction := flag.String("direction", "up", "Migration direction: up or down")
 	flag.Parse()
 
+	// Load the database configuration.
 	dbConfig, err := config.NewDBConfig()
 	if err != nil {
 		log.Fatalf("Failed to load database configuration: %v", err)
 	}
-
 	if dbConfig.Database.URL == "" {
 		log.Fatalf("Database URL is empty. Please check your config.toml file.")
 	}
-
 	err = dbConfig.Initialize()
 	if err != nil {
 		log.Fatalf("Failed to initialize database connection: %v", err)
 	}
 	defer dbConfig.DB.Close()
 
+	// Create a new migration runner.
 	runner := migrations.NewMigrationRunner(dbConfig.DB)
 
 	migrationsToRun := []migrations.Migration{
@@ -44,6 +44,7 @@ func Run() {
 		// Add more migrations here as needed
 	}
 
+	// Run or revert the migrations based on the specified direction.
 	switch MigrationDirection(*direction) {
 	case MigrationDirectionUp:
 		err = runner.RunMigrations(migrationsToRun)

@@ -41,15 +41,11 @@ func NewDBConfig() (*DBConfig, error) {
 		log.Printf("Error reading config file: %v", err)
 		return nil, err
 	}
-	log.Printf("Config file contents: %s", string(configFile))
 
 	if err := toml.Unmarshal(configFile, config); err != nil {
 		log.Printf("Error unmarshaling config: %v", err)
 		return nil, err
 	}
-
-	log.Printf("Loaded database URL: %s", config.Database.URL)
-	log.Printf("Full config: %+v", config)
 
 	return config, nil
 }

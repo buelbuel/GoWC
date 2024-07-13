@@ -1,5 +1,6 @@
 # Web Application Scaffolding with Echo Framework
 [![Go Reference](https://pkg.go.dev/badge/github.com/buelbuel/gowc.svg)](https://pkg.go.dev/github.com/buelbuel/gowc)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbuelbuel%2FGoWC.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbuelbuel%2FGoWC?ref=badge_shield)
 
 This repository contains a boilerplate for a basic MVC style web application using the Echo Framework. The application utilizes native Go templates for rendering views, ensuring efficient server-side HTML generation. It also includes an example model, controller, and view for a user registration and authentication system with JSON Web Tokens for authentication.
 
@@ -207,3 +208,6 @@ Contributions to this project are welcome. Please refer to the contributing guid
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbuelbuel%2FGoWC.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbuelbuel%2FGoWC?ref=badge_large)

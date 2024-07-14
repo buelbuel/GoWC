@@ -36,11 +36,4 @@ RateBurst = 100
 css = "resources/css"
 js = "resources/js"
 images = "resources/images"
-
-[TLS]
-# Path to SSL certificate file
-CertFile = "cert.pem"
-# Path to SSL key file
-KeyFile = "key.pem"
-# Enable HTTPS
-UseTLS = false
+static = "resources/static"

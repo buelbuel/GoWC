@@ -24,8 +24,6 @@
 <body>
 	{{ if eq .Layout "FrontLayout" }}
 		{{ template "FrontLayoutBody" . }}
-	{{ else if eq .Layout "AppLayout" }}
-		{{ template "AppLayoutBody" . }}
 	{{ end }}
 
 	<gowc-toast id="toast"></gowc-toast>

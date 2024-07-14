@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/buelbuel/gowc/handlers"
-	"github.com/buelbuel/gowc/utils"
+	"github.com/buelbuel/gowc/internal/handlers"
+	"github.com/buelbuel/gowc/internal/utils"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )

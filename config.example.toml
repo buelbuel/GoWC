@@ -31,31 +31,11 @@ RateLimit = 1000.0
 # Maximum Rate Burst
 RateBurst = 100
 
-[Auth]
-# Secret key for JWT token generation
-JwtSecretKey = "your_secret_key_here"
-# JWT token expiration time
-JwtExpirationTime = "72h"
-
-[Database]
-# Database connection URL
-URL = "postgres://user:password@localhost/db?sslmode=disable"
-# Maximum number of open connections to the database
-MaxConns = 10
-# Maximum number of idle connections in the pool
-MaxIdleConns = 5
-# Maximum amount of time a connection may be reused
-ConnMaxLifetime = "1h"
-
 [StaticPaths]
 # Paths for serving static files
 css = "resources/css"
 js = "resources/js"
 images = "resources/images"
-
-[State]
-# Initial application state
-InitialState = { user = "", isAuthenticated = false }
 
 [TLS]
 # Path to SSL certificate file

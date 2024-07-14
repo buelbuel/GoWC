@@ -4,7 +4,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/buelbuel/gowc)](https://goreportcard.com/report/github.com/buelbuel/gowc)
 ![GitHub License](https://img.shields.io/github/license/buelbuel/gowc)
 
-This repository contains a boilerplate for a basic MVC style web application using the Echo Framework. The application utilizes native Go templates for rendering views, ensuring efficient server-side HTML generation. It also includes an example model, controller, and view for a user registration and authentication system with JSON Web Tokens for authentication.
+This repository contains a boilerplate for a basic MVC style web application using the Echo Framework. The application utilizes native Go templates for rendering views, ensuring efficient server-side HTML generation. ~~It also includes an example model, controller, and view for a user registration and authentication system with JSON Web Tokens for authentication.~~
 
 ## Features
 

@@ -55,24 +55,6 @@ Below are the available configuration options in config.toml:
 - **RateLimit**: Rate limiting requests per second.
 - **RateBurst**: Maximum burst for rate limiter.
 
-## Database Migrations
-
-The application includes a migration tool to manage database schema changes. To run migrations:
-
-- To apply migrations:
-
-```bash
-go run cmd/main.go -migrate up
-```
-
-- To roll back migrations:
-
-```bash
-go run cmd/main.go -migrate down
-```
-
-Migrations are defined in the `internal/migrations` package. To add a new migration, create a new struct that implements the `Migration` interface and add it to the `migrationsToRun` slice in `cmd/migrate/main.go`.
-
 ### Notes
 
 * CORS is disabled by default. You may need CORS for API endpoints or for local development, depending on your use case. To enable CORS, set `EnableCors`to true.

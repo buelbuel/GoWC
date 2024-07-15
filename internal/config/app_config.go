@@ -183,7 +183,8 @@ func (config *AppConfig) StartServer(echo *echo.Echo) {
 
 	if config.UseAutoTLS {
 		echo.AutoTLSManager.Cache = autocert.DirCache(config.CacheDir)
-		echo.Logger.Fatal(echo.StartAutoTLS(":443"))
+		echo.AutoTLSManager.HostPolicy = autocert.HostWhitelist(config.Domain)
+        echo.Logger.Fatal(echo.StartAutoTLS(":443"))
 	} else if config.UseTLS {
 		echo.Logger.Fatal(echo.StartTLS(address, config.CertFile, config.KeyFile))
 	} else {
